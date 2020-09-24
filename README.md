@@ -1,1 +1,1 @@
-# Upload file to AWS S3 with Flask
+# Simple Flask Template for Heroku Deploy
