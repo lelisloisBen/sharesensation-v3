@@ -1,4 +1,12 @@
 
+create table activities(
+    id INT NOT NULL AUTO_INCREMENT,
+    cat VARCHAR(100),
+    name VARCHAR(100),
+    path VARCHAR(220),
+    PRIMARY KEY (id)
+)
+
 ### Categories ###
 
 db.session.add(Categories(
