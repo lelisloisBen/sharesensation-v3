@@ -171,69 +171,19 @@ insert into activities (cat, name, path) value
 ("air", "skydiving", "/img/activities/air/skydiving.jpg"),
 ("air", "space shuttle", "/img/activities/air/spaceshuttle.jpg"),
 ("air", "wing suit", "/img/activities/air/wingsuit.jpg"),
+("animal", "dog racing", "/img/activities/animal/dogracing.jpg"),
+("animal", "dogsled", "/img/activities/animal/dogsled.jpg"),
+("animal", "elephant polo", "/img/activities/animal/elephantpolo.jpg"),
+("animal", "horse polo", "/img/activities/animal/horsepolo.jpg"),
+("animal", "horse ski", "/img/activities/animal/horseski.jpg"),
+("animal", "horsesled", "/img/activities/animal/horsesled.jpg"),
+("animal", "riding camel", "/img/activities/animal/ridingcamel.jpg"),
+("animal", "riding elephant", "/img/activities/animal/ridingelephant.jpg"),
+("animal", "riding horse", "/img/activities/animal/ridinghorse.jpg"),
+("animal", "rodeo", "/img/activities/animal/rodeo.jpg"),
+("animal", "shark cage", "/img/activities/animal/sharkcage.jpg"),
+("animal", "swim dolphins", "/img/activities/animal/swimdolphins.jpg"),
 
-
-### animal ###
-db.session.add(Activities(
-        cat = "animal",
-        name = "dog racing",
-        link = "/img/activities/animal/dogracing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "dogsled",
-        link = "/img/activities/animal/dogsled.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "elephant polo",
-        link = "/img/activities/animal/elephantpolo.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "horse polo",
-        link = "/img/activities/animal/horsepolo.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "horse ski",
-        link = "/img/activities/animal/horseski.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "horsesled",
-        link = "/img/activities/animal/horsesled.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "riding camel",
-        link = "/img/activities/animal/ridingcamel.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "riding elephant",
-        link = "/img/activities/animal/ridingelephant.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "riding horse",
-        link = "/img/activities/animal/ridinghorse.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "rodeo",
-        link = "/img/activities/animal/rodeo.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "shark cage",
-        link = "/img/activities/animal/sharkcage.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "animal",
-        name = "swim dolphins",
-        link = "/img/activities/animal/swimdolphins.jpg"
-    ))
 
 ### motor ###
 db.session.add(Activities(
