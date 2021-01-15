@@ -106,54 +106,16 @@ insert into activities (cat, name, path) value
 ("mountain", "snowmobile", "/img/activities/mountain/snowmobile.jpg"),
 ("mountain", "snowshoes", "/img/activities/mountain/snowshoes.jpg"),
 ("mountain", "speedskiing", "/img/activities/mountain/speedskiing.jpg"),
+("shooting", "airsoft", "/img/activities/shooting/airsoft.jpg"),
+("shooting", "archery", "/img/activities/shooting/archery.jpg"),
+("shooting", "clay target", "/img/activities/shooting/claytarget.jpg"),
+("shooting", "foxhunting", "/img/activities/shooting/foxhunting.jpg"),
+("shooting", "gunshoot", "/img/activities/shooting/gunshoot.jpg"),
+("shooting", "hunting", "/img/activities/shooting/hunting.jpg"),
+("shooting", "laser games", "/img/activities/shooting/lasergames.jpg"),
+("shooting", "paintball", "/img/activities/shooting/paintball.jpg"),
+("shooting", "rifle", "/img/activities/shooting/rifle.jpg"),
 
-
-### shooting ###
-db.session.add(Activities(
-        cat = "shooting",
-        name = "airsoft",
-        link = "/img/activities/shooting/airsoft.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "archery",
-        link = "/img/activities/shooting/archery.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "clay target",
-        link = "/img/activities/shooting/claytarget.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "foxhunting",
-        link = "/img/activities/shooting/foxhunting.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "gunshoot",
-        link = "/img/activities/shooting/gunshoot.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "hunting",
-        link = "/img/activities/shooting/hunting.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "laser games",
-        link = "/img/activities/shooting/lasergames.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "paintball",
-        link = "/img/activities/shooting/paintball.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "shooting",
-        name = "rifle",
-        link = "/img/activities/shooting/rifle.jpg"
-    ))
 
 ### wheel ### 
 db.session.add(Activities(
