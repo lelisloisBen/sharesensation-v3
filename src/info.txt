@@ -183,92 +183,22 @@ insert into activities (cat, name, path) value
 ("animal", "rodeo", "/img/activities/animal/rodeo.jpg"),
 ("animal", "shark cage", "/img/activities/animal/sharkcage.jpg"),
 ("animal", "swim dolphins", "/img/activities/animal/swimdolphins.jpg"),
+("motor", "4x4", "/img/activities/motor/4x4.jpg"),
+("motor", "A.T.V", "/img/activities/motor/atv.jpg"),
+("motor", "buggy", "/img/activities/motor/buggy.jpg"),
+("motor", "desert", "/img/activities/motor/desert.jpg"),
+("motor", "drift", "/img/activities/motor/drift.jpg"),
+("motor", "formula 1", "/img/activities/motor/formula1.jpg"),
+("motor", "ice-racing", "/img/activities/motor/iceracing.jpg"),
+("motor", "kart", "/img/activities/motor/kart.jpg"),
+("motor", "locomotive", "/img/activities/motor/locomotive.jpg"),
+("motor", "moto", "/img/activities/motor/moto.jpg"),
+("motor", "motocross", "/img/activities/motor/motocross.jpg"),
+("motor", "rallye", "/img/activities/motor/rallye.jpg"),
+("motor", "scooter", "/img/activities/motor/scooter.jpg"),
+("motor", "sidecar", "/img/activities/motor/sidecar.jpg"),
+("motor", "sportive", "/img/activities/motor/sportive.jpg"),
+("motor", "sportive-car", "/img/activities/motor/sportivecar.jpg"),
+("motor", "tuk-tuk", "/img/activities/motor/tuktuk.jpg")
 
-
-### motor ###
-db.session.add(Activities(
-        cat = "motor",
-        name = "4x4",
-        link = "/img/activities/motor/4x4.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "A.T.V",
-        link = "/img/activities/motor/atv.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "buggy",
-        link = "/img/activities/motor/buggy.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "desert",
-        link = "/img/activities/motor/desert.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "drift",
-        link = "/img/activities/motor/drift.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "formula 1",
-        link = "/img/activities/motor/formula1.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "ice-racing",
-        link = "/img/activities/motor/iceracing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "kart",
-        link = "/img/activities/motor/kart.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "locomotive",
-        link = "/img/activities/motor/locomotive.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "moto",
-        link = "/img/activities/motor/moto.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "motocross",
-        link = "/img/activities/motor/motocross.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "rallye",
-        link = "/img/activities/motor/rallye.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "scooter",
-        link = "/img/activities/motor/scooter.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "sidecar",
-        link = "/img/activities/motor/sidecar.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "sportive",
-        link = "/img/activities/motor/sportive.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "sportive-car",
-        link = "/img/activities/motor/sportivecar.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "motor",
-        name = "tuk-tuk",
-        link = "/img/activities/motor/tuktuk.jpg"
-    ))
 
