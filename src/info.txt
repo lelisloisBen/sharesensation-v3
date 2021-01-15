@@ -1,0 +1,46 @@
+
+
+db.session.add(Categories(
+        name = "motor",
+        link = "/img/categories/mechanic.jpg"
+    ))
+    db.session.add(Categories(
+        name = "water",
+        link = "/img/categories/water.jpg"
+    ))
+    db.session.add(Categories(
+        name = "air",
+        link = "/img/categories/air.jpg"
+    ))
+    db.session.add(Categories(
+        name = "wheel",
+        link = "/img/categories/wheel.jpg"
+    ))
+    db.session.add(Categories(
+        name = "shooting",
+        link = "/img/categories/shooting.jpg"
+    ))
+    db.session.add(Categories(
+        name = "animal",
+        link = "/img/categories/animal.jpg"
+    ))
+    db.session.add(Categories(
+        name = "mountain",
+        link = "/img/categories/mountain.jpg"
+    ))
+    db.session.add(Categories(
+        name = "indoor",
+        link = "/img/categories/indoor.jpg"
+    ))
+    db.session.add(Categories(
+        name = "outdoor",
+        link = "/img/categories/outdoor.jpg"
+    ))
+    db.session.add(Categories(
+        name = "ticket",
+        link = "/img/categories/ticket.jpg"
+    ))
+    db.session.add(Categories(
+        name = "vip",
+        link = "/img/categories/vip.jpg"
+    ))
