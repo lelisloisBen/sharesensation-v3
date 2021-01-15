@@ -155,89 +155,23 @@ insert into activities (cat, name, path) value
 ("water", "water polo", "/img/activities/water/waterpolo.jpg"),
 ("water", "water ski", "/img/activities/water/waterskiing.jpg"),
 ("water", "windsurf", "/img/activities/water/windsurfing.jpg"),
+("air", "acrobatic airplane", "/img/activities/air/acrobaticairplane.jpg"),
+("air", "aeromodelisme", "/img/activities/air/aeromodelisme.jpg"),
+("air", "aeroplane", "/img/activities/air/aeroplane.jpg"),
+("air", "aeroplane banner", "/img/activities/air/aeroplanebanner.jpg"),
+("air", "ballooning.jpg", "/img/activities/air/ballooning"),
+("air", "base jumping", "/img/activities/air/basejumping.jpg"),
+("air", "bungee jumping", "/img/activities/air/bungeejumping.jpg"),
+("air", "fighter plane", "/img/activities/air/fighterplnae.jpg"),
+("air", "hang gliding", "/img/activities/air/hanggliding.jpg"),
+("air", "helicopter", "/img/activities/air/helicopter.jpg"),
+("air", "paragliding", "/img/activities/air/paragliding.jpg"),
+("air", "paramotor", "/img/activities/air/paramotor.jpg"),
+("air", "plane", "/img/activities/air/plane.jpg"),
+("air", "skydiving", "/img/activities/air/skydiving.jpg"),
+("air", "space shuttle", "/img/activities/air/spaceshuttle.jpg"),
+("air", "wing suit", "/img/activities/air/wingsuit.jpg"),
 
-
-### air ###
-db.session.add(Activities(
-        cat = "air",
-        name = "acrobatic airplane",
-        link = "/img/activities/air/acrobaticairplane.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "aeromodelisme",
-        link = "/img/activities/air/aeromodelisme.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "aeroplane",
-        link = "/img/activities/air/aeroplane.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "aeroplane banner",
-        link = "/img/activities/air/aeroplanebanner.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "ballooning.jpg",
-        link = "/img/activities/air/ballooning"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "base jumping",
-        link = "/img/activities/air/basejumping.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "bungee jumping",
-        link = "/img/activities/air/bungeejumping.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "fighter plane",
-        link = "/img/activities/air/fighterplnae.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "hang gliding",
-        link = "/img/activities/air/hanggliding.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "helicopter",
-        link = "/img/activities/air/helicopter.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "paragliding",
-        link = "/img/activities/air/paragliding.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "paramotor",
-        link = "/img/activities/air/paramotor.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "plane",
-        link = "/img/activities/air/plane.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "skydiving",
-        link = "/img/activities/air/skydiving.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "space shuttle",
-        link = "/img/activities/air/spaceshuttle.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "air",
-        name = "wing suit",
-        link = "/img/activities/air/wingsuit.jpg"
-    ))
 
 ### animal ###
 db.session.add(Activities(
