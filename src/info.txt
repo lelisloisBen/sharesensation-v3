@@ -1,4 +1,5 @@
 
+### Categories ###
 
 db.session.add(Categories(
         name = "motor",
@@ -44,3 +45,941 @@ db.session.add(Categories(
         name = "vip",
         link = "/img/categories/vip.jpg"
     ))
+
+### VIP ###
+db.session.add(Activities(
+        cat = "vip",
+        name = "bodyguard",
+        link = "/img/activities/vip/bodyguard.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "chauffeur",
+        link = "/img/activities/vip/chauffeur.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "concierge",
+        link = "/img/activities/vip/concierge.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "event",
+        link = "/img/activities/vip/event.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "luxury car",
+        link = "/img/activities/vip/luxurycar.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "luxury house",
+        link = "/img/activities/vip/luxuryhouse.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "private helicopter",
+        link = "/img/activities/vip/privatehelicopter.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "private jet",
+        link = "/img/activities/vip/privatejet.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "V.I.P Table",
+        link = "/img/activities/vip/viptable.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "vip",
+        name = "yacht",
+        link = "/img/activities/vip/yacht.jpg"
+
+### Tikets ###
+db.session.add(Activities(
+        cat = "ticket",
+        name = "circus tickets",
+        link = "/img/activities/ticket/circus.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "ticket",
+        name = "concert tickets",
+        link = "/img/activities/ticket/concert.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "ticket",
+        name = "opera tickets",
+        link = "/img/activities/ticket/opera.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "ticket",
+        name = "sports tickets",
+        link = "/img/activities/ticket/sports.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "ticket",
+        name = "theater tickets",
+        link = "/img/activities/ticket/theater.jpg"
+    ))
+    db.session.commit()
+    return jsonify({
+        'Activities': 'Added!',
+        'msg': 'Activities Successfully Added'
+    })
+
+### outdoor ### 
+db.session.add(Activities(
+        cat = "outdoor",
+        name = "american football",
+        link = "/img/activities/outdoor/americanfootball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "baseball",
+        link = "/img/activities/outdoor/baseball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "beach volleyball",
+        link = "/img/activities/outdoor/beachvolleyball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "bus tour",
+        link = "/img/activities/outdoor/bustour.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "cheerleading",
+        link = "/img/activities/outdoor/cheerleading.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "cricket",
+        link = "/img/activities/outdoor/cricket.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "croquet",
+        link = "/img/activities/outdoor/croquet.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "golf",
+        link = "/img/activities/outdoor/golf.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "guide",
+        link = "/img/activities/outdoor/guide.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "land sailing",
+        link = "/img/activities/outdoor/landsailing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "soccer",
+        link = "/img/activities/outdoor/soccer.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "softball",
+        link = "/img/activities/outdoor/softball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "street hockey",
+        link = "/img/activities/outdoor/streethockey.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "tennis",
+        link = "/img/activities/outdoor/tennis.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "yoga",
+        link = "/img/activities/outdoor/yoga.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "ziplining",
+        link = "/img/activities/outdoor/ziplining.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "outdoor",
+        name = "zorbing",
+        link = "/img/activities/outdoor/zorbing.jpg"
+    ))
+    db.session.commit()
+    return jsonify({
+        'Activities': 'Added!',
+        'msg': 'Activities Successfully Added'
+    })
+
+### indoor ###
+db.session.add(Activities(
+        cat = "indoor",
+        name = "aerobics",
+        link = "/img/activities/indoor/aerobics.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "aikido",
+        link = "/img/activities/indoor/aikido.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "badminton",
+        link = "/img/activities/indoor/badminton.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "bandy",
+        link = "/img/activities/indoor/bandy.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "basketball",
+        link = "/img/activities/indoor/basketball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "bowling",
+        link = "/img/activities/indoor/bowling.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "boxing",
+        link = "/img/activities/indoor/boxing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "coaching",
+        link = "/img/activities/indoor/coaching.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "cooking classes",
+        link = "/img/activities/indoor/cooking.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "crossfit",
+        link = "/img/activities/indoor/crossfit.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "curling",
+        link = "/img/activities/indoor/curling.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "dj",
+        link = "/img/activities/indoor/dj.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "dodgeball",
+        link = "/img/activities/indoor/dodgeball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "fencing",
+        link = "/img/activities/indoor/fencing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "fight cage",
+        link = "/img/activities/indoor/fightcage.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "fitness",
+        link = "/img/activities/indoor/fitness.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "foam pit",
+        link = "/img/activities/indoor/foampit.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "handball",
+        link = "/img/activities/indoor/handball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "ice hockey",
+        link = "/img/activities/indoor/icehockey.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "ice skating",
+        link = "/img/activities/indoor/iceskating.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "indoor climbing",
+        link = "/img/activities/indoor/indoorclimbing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "jorkyball",
+        link = "/img/activities/indoor/jorkyball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "karaoke",
+        link = "/img/activities/indoor/karaoke.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "kickboxing",
+        link = "/img/activities/indoor/kickboxing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "massage",
+        link = "/img/activities/indoor/massage.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "mechanic bull",
+        link = "/img/activities/indoor/mechanicbull.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "music lessons",
+        link = "/img/activities/indoor/music.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "photo shooting",
+        link = "/img/activities/indoor/photoshooting.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "poker",
+        link = "/img/activities/indoor/poker.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "pole dance",
+        link = "/img/activities/indoor/poledance.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "pool table",
+        link = "/img/activities/indoor/pooltable.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "roller derby",
+        link = "/img/activities/indoor/rollerderby.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "simulator",
+        link = "/img/activities/indoor/simulator.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "squash",
+        link = "/img/activities/indoor/squash.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "striptease",
+        link = "/img/activities/indoor/striptease.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "tennis",
+        link = "/img/activities/indoor/tennis.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "trampoline",
+        link = "/img/activities/indoor/trampoline.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "volleyball",
+        link = "/img/activities/indoor/volleyball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "indoor",
+        name = "wind tunnel",
+        link = "/img/activities/indoor/windtunnel.jpg"
+    ))
+
+
+### mountain ### 
+db.session.add(Activities(
+        cat = "mountain",
+        name = "bobsled",
+        link = "/img/activities/mountain/bobsled.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "cross-country skiing",
+        link = "/img/activities/mountain/crosscountryskiing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "dogsled",
+        link = "/img/activities/mountain/dogsled.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "horsesled",
+        link = "/img/activities/mountain/horsesled.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "igloo",
+        link = "/img/activities/mountain/igloo.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "mountain bike",
+        link = "/img/activities/mountain/mountainbike.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "rock climbing",
+        link = "/img/activities/mountain/rockclimbing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "scooter bike",
+        link = "/img/activities/mountain/scooterbike.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "ski",
+        link = "/img/activities/mountain/skiing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "skijoring",
+        link = "/img/activities/mountain/skijore.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "snowbike",
+        link = "/img/activities/mountain/snowbike.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "snowboard",
+        link = "/img/activities/mountain/snowboard.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "snowkite",
+        link = "/img/activities/mountain/snowkite.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "snowmobile",
+        link = "/img/activities/mountain/snowmobile.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "snowshoes",
+        link = "/img/activities/mountain/snowshoes.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "mountain",
+        name = "speedskiing",
+        link = "/img/activities/mountain/speedskiing.jpg"
+    ))
+
+### shooting ###
+db.session.add(Activities(
+        cat = "shooting",
+        name = "airsoft",
+        link = "/img/activities/shooting/airsoft.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "archery",
+        link = "/img/activities/shooting/archery.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "clay target",
+        link = "/img/activities/shooting/claytarget.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "foxhunting",
+        link = "/img/activities/shooting/foxhunting.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "gunshoot",
+        link = "/img/activities/shooting/gunshoot.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "hunting",
+        link = "/img/activities/shooting/hunting.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "laser games",
+        link = "/img/activities/shooting/lasergames.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "paintball",
+        link = "/img/activities/shooting/paintball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "shooting",
+        name = "rifle",
+        link = "/img/activities/shooting/rifle.jpg"
+    ))
+
+### wheel ### 
+db.session.add(Activities(
+        cat = "wheel",
+        name = "bicycle",
+        link = "/img/activities/wheel/bicycle.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "wheel",
+        name = "BMX",
+        link = "/img/activities/wheel/bmx.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "wheel",
+        name = "electric skateboard",
+        link = "/img/activities/wheel/electricskateboard.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "wheel",
+        name = "golf car",
+        link = "/img/activities/wheel/golfcar.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "wheel",
+        name = "minicar",
+        link = "/img/activities/wheel/minicar.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "wheel",
+        name = "roller",
+        link = "/img/activities/wheel/roller.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "wheel",
+        name = "segway",
+        link = "/img/activities/wheel/segway.jpg"
+    ))
+
+### water ###
+db.session.add(Activities(
+        cat = "water",
+        name = "boat",
+        link = "/img/activities/water/boat.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "exotic boat",
+        link = "/img/activities/water/exoticboat.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "gondolas",
+        link = "/img/activities/water/gondolas.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "jet ski",
+        link = "/img/activities/water/jetskiing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "kayak",
+        link = "/img/activities/water/kayak.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "kite surf",
+        link = "/img/activities/water/kitesurfing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "outrigger canoes",
+        link = "/img/activities/water/outriggercanoes.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "paddle board",
+        link = "/img/activities/water/paddleboarding.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "parasailing",
+        link = "/img/activities/water/parasailing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "pirogue",
+        link = "/img/activities/water/pirogue.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "rafting",
+        link = "/img/activities/water/rafting.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "rowing",
+        link = "/img/activities/water/rowing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "sailing",
+        link = "/img/activities/water/sailing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "scubadiving",
+        link = "/img/activities/water/scubadiving.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "sea breacher",
+        link = "/img/activities/water/seabreacher.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "shark cage",
+        link = "/img/activities/water/sharkcage.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "snorkeling",
+        link = "/img/activities/water/snorkeling.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "spear fishing",
+        link = "/img/activities/water/spearfishing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "submarine",
+        link = "/img/activities/water/submarine.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "surfing",
+        link = "/img/activities/water/surfing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "swim dolphins",
+        link = "/img/activities/water/swimdolphins.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "thai boat",
+        link = "/img/activities/water/thaiboat.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "trampoline water",
+        link = "/img/activities/water/trampolinewater.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "underwater photo",
+        link = "/img/activities/water/underwaterphoto.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "underwater scooter",
+        link = "/img/activities/water/underwaterscooter.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "wakeboarding",
+        link = "/img/activities/water/wakeboarding.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "water aerobic",
+        link = "/img/activities/water/wateraerobic.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "water basketball",
+        link = "/img/activities/water/waterbasketball.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "water jetpack",
+        link = "/img/activities/water/waterjetpack.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "water jump",
+        link = "/img/activities/water/waterjump.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "water polo",
+        link = "/img/activities/water/waterpolo.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "water ski",
+        link = "/img/activities/water/waterskiing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "water",
+        name = "windsurf",
+        link = "/img/activities/water/windsurfing.jpg"
+    ))
+
+### air ###
+db.session.add(Activities(
+        cat = "air",
+        name = "acrobatic airplane",
+        link = "/img/activities/air/acrobaticairplane.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "aeromodelisme",
+        link = "/img/activities/air/aeromodelisme.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "aeroplane",
+        link = "/img/activities/air/aeroplane.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "aeroplane banner",
+        link = "/img/activities/air/aeroplanebanner.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "ballooning.jpg",
+        link = "/img/activities/air/ballooning"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "base jumping",
+        link = "/img/activities/air/basejumping.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "bungee jumping",
+        link = "/img/activities/air/bungeejumping.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "fighter plane",
+        link = "/img/activities/air/fighterplnae.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "hang gliding",
+        link = "/img/activities/air/hanggliding.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "helicopter",
+        link = "/img/activities/air/helicopter.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "paragliding",
+        link = "/img/activities/air/paragliding.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "paramotor",
+        link = "/img/activities/air/paramotor.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "plane",
+        link = "/img/activities/air/plane.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "skydiving",
+        link = "/img/activities/air/skydiving.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "space shuttle",
+        link = "/img/activities/air/spaceshuttle.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "air",
+        name = "wing suit",
+        link = "/img/activities/air/wingsuit.jpg"
+    ))
+
+### animal ###
+db.session.add(Activities(
+        cat = "animal",
+        name = "dog racing",
+        link = "/img/activities/animal/dogracing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "dogsled",
+        link = "/img/activities/animal/dogsled.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "elephant polo",
+        link = "/img/activities/animal/elephantpolo.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "horse polo",
+        link = "/img/activities/animal/horsepolo.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "horse ski",
+        link = "/img/activities/animal/horseski.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "horsesled",
+        link = "/img/activities/animal/horsesled.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "riding camel",
+        link = "/img/activities/animal/ridingcamel.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "riding elephant",
+        link = "/img/activities/animal/ridingelephant.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "riding horse",
+        link = "/img/activities/animal/ridinghorse.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "rodeo",
+        link = "/img/activities/animal/rodeo.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "shark cage",
+        link = "/img/activities/animal/sharkcage.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "animal",
+        name = "swim dolphins",
+        link = "/img/activities/animal/swimdolphins.jpg"
+    ))
+
+### motor ###
+db.session.add(Activities(
+        cat = "motor",
+        name = "4x4",
+        link = "/img/activities/motor/4x4.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "A.T.V",
+        link = "/img/activities/motor/atv.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "buggy",
+        link = "/img/activities/motor/buggy.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "desert",
+        link = "/img/activities/motor/desert.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "drift",
+        link = "/img/activities/motor/drift.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "formula 1",
+        link = "/img/activities/motor/formula1.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "ice-racing",
+        link = "/img/activities/motor/iceracing.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "kart",
+        link = "/img/activities/motor/kart.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "locomotive",
+        link = "/img/activities/motor/locomotive.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "moto",
+        link = "/img/activities/motor/moto.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "motocross",
+        link = "/img/activities/motor/motocross.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "rallye",
+        link = "/img/activities/motor/rallye.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "scooter",
+        link = "/img/activities/motor/scooter.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "sidecar",
+        link = "/img/activities/motor/sidecar.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "sportive",
+        link = "/img/activities/motor/sportive.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "sportive-car",
+        link = "/img/activities/motor/sportivecar.jpg"
+    ))
+    db.session.add(Activities(
+        cat = "motor",
+        name = "tuk-tuk",
+        link = "/img/activities/motor/tuktuk.jpg"
+    ))
+
