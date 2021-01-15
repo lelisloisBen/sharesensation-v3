@@ -115,44 +115,13 @@ insert into activities (cat, name, path) value
 ("shooting", "laser games", "/img/activities/shooting/lasergames.jpg"),
 ("shooting", "paintball", "/img/activities/shooting/paintball.jpg"),
 ("shooting", "rifle", "/img/activities/shooting/rifle.jpg"),
-
-
-### wheel ### 
-db.session.add(Activities(
-        cat = "wheel",
-        name = "bicycle",
-        link = "/img/activities/wheel/bicycle.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "wheel",
-        name = "BMX",
-        link = "/img/activities/wheel/bmx.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "wheel",
-        name = "electric skateboard",
-        link = "/img/activities/wheel/electricskateboard.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "wheel",
-        name = "golf car",
-        link = "/img/activities/wheel/golfcar.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "wheel",
-        name = "minicar",
-        link = "/img/activities/wheel/minicar.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "wheel",
-        name = "roller",
-        link = "/img/activities/wheel/roller.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "wheel",
-        name = "segway",
-        link = "/img/activities/wheel/segway.jpg"
-    ))
+("wheel", "bicycle", "/img/activities/wheel/bicycle.jpg"),
+("wheel", "BMX", "/img/activities/wheel/bmx.jpg"),
+("wheel", "electric skateboard", "/img/activities/wheel/electricskateboard.jpg"),
+("wheel", "golf car", "/img/activities/wheel/golfcar.jpg"),
+("wheel", "minicar", "/img/activities/wheel/minicar.jpg"),
+("wheel", "roller", "/img/activities/wheel/roller.jpg"),
+("wheel", "segway", "/img/activities/wheel/segway.jpg"),
 
 ### water ###
 db.session.add(Activities(
