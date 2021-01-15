@@ -52,237 +52,44 @@ insert into activities (cat, name, path) value
 ("outdoor", "ziplining", "/img/activities/outdoor/ziplining.jpg"),
 ("outdoor", "zorbing", "/img/activities/outdoor/zorbing.jpg"),
 ("indoor", "aerobics", "/img/activities/indoor/aerobics.jpg"),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-("indoor", "", ""),
-
-### indoor ###
-
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "aikido",
-        link = "/img/activities/indoor/aikido.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "badminton",
-        link = "/img/activities/indoor/badminton.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "bandy",
-        link = "/img/activities/indoor/bandy.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "basketball",
-        link = "/img/activities/indoor/basketball.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "bowling",
-        link = "/img/activities/indoor/bowling.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "boxing",
-        link = "/img/activities/indoor/boxing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "coaching",
-        link = "/img/activities/indoor/coaching.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "cooking classes",
-        link = "/img/activities/indoor/cooking.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "crossfit",
-        link = "/img/activities/indoor/crossfit.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "curling",
-        link = "/img/activities/indoor/curling.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "dj",
-        link = "/img/activities/indoor/dj.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "dodgeball",
-        link = "/img/activities/indoor/dodgeball.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "fencing",
-        link = "/img/activities/indoor/fencing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "fight cage",
-        link = "/img/activities/indoor/fightcage.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "fitness",
-        link = "/img/activities/indoor/fitness.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "foam pit",
-        link = "/img/activities/indoor/foampit.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "handball",
-        link = "/img/activities/indoor/handball.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "ice hockey",
-        link = "/img/activities/indoor/icehockey.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "ice skating",
-        link = "/img/activities/indoor/iceskating.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "indoor climbing",
-        link = "/img/activities/indoor/indoorclimbing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "jorkyball",
-        link = "/img/activities/indoor/jorkyball.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "karaoke",
-        link = "/img/activities/indoor/karaoke.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "kickboxing",
-        link = "/img/activities/indoor/kickboxing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "massage",
-        link = "/img/activities/indoor/massage.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "mechanic bull",
-        link = "/img/activities/indoor/mechanicbull.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "music lessons",
-        link = "/img/activities/indoor/music.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "photo shooting",
-        link = "/img/activities/indoor/photoshooting.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "poker",
-        link = "/img/activities/indoor/poker.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "pole dance",
-        link = "/img/activities/indoor/poledance.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "pool table",
-        link = "/img/activities/indoor/pooltable.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "roller derby",
-        link = "/img/activities/indoor/rollerderby.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "simulator",
-        link = "/img/activities/indoor/simulator.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "squash",
-        link = "/img/activities/indoor/squash.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "striptease",
-        link = "/img/activities/indoor/striptease.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "tennis",
-        link = "/img/activities/indoor/tennis.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "trampoline",
-        link = "/img/activities/indoor/trampoline.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "volleyball",
-        link = "/img/activities/indoor/volleyball.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "indoor",
-        name = "wind tunnel",
-        link = "/img/activities/indoor/windtunnel.jpg"
-    ))
+("indoor", "aikido", "/img/activities/indoor/aikido.jpg"),
+("indoor", "badminton", "/img/activities/indoor/badminton.jpg"),
+("indoor", "bandy", "/img/activities/indoor/bandy.jpg"),
+("indoor", "basketball", "/img/activities/indoor/basketball.jpg"),
+("indoor", "bowling", "/img/activities/indoor/bowling.jpg"),
+("indoor", "boxing", "/img/activities/indoor/boxing.jpg"),
+("indoor", "coaching", "/img/activities/indoor/coaching.jpg"),
+("indoor", "cooking classes", "/img/activities/indoor/cooking.jpg"),
+("indoor", "crossfit", "/img/activities/indoor/crossfit.jpg"),
+("indoor", "curling", "/img/activities/indoor/curling.jpg"),
+("indoor", "dj", "/img/activities/indoor/dj.jpg"),
+("indoor", "dodgeball", "/img/activities/indoor/dodgeball.jpg"),
+("indoor", "fencing", "/img/activities/indoor/fencing.jpg"),
+("indoor", "fight cage", "/img/activities/indoor/fightcage.jpg"),
+("indoor", "fitness", "/img/activities/indoor/fitness.jpg"),
+("indoor", "foam pit", "/img/activities/indoor/foampit.jpg"),
+("indoor", "handball", "/img/activities/indoor/handball.jpg"),
+("indoor", "ice hockey", "/img/activities/indoor/icehockey.jpg"),
+("indoor", "ice skating", "/img/activities/indoor/iceskating.jpg"),
+("indoor", "indoor climbing", "/img/activities/indoor/indoorclimbing.jpg"),
+("indoor", "jorkyball", "/img/activities/indoor/jorkyball.jpg"),
+("indoor", "karaoke", "/img/activities/indoor/karaoke.jpg"),
+("indoor", "kickboxing", "/img/activities/indoor/kickboxing.jpg"),
+("indoor", "massage", "/img/activities/indoor/massage.jpg"),
+("indoor", "mechanic bull", "/img/activities/indoor/mechanicbull.jpg"),
+("indoor", "music lessons", "/img/activities/indoor/music.jpg"),
+("indoor", "photo shooting", "/img/activities/indoor/photoshooting.jpg"),
+("indoor", "poker", "/img/activities/indoor/poker.jpg"),
+("indoor", "pole dance", "/img/activities/indoor/poledance.jpg"),
+("indoor", "pool table", "/img/activities/indoor/pooltable.jpg"),
+("indoor", "roller derby", "/img/activities/indoor/rollerderby.jpg"),
+("indoor", "simulator", "/img/activities/indoor/simulator.jpg"),
+("indoor", "squash", "/img/activities/indoor/squash.jpg"),
+("indoor", "striptease", "/img/activities/indoor/striptease.jpg"),
+("indoor", "tennis", "/img/activities/indoor/tennis.jpg"),
+("indoor", "trampoline", "/img/activities/indoor/trampoline.jpg"),
+("indoor", "volleyball", "/img/activities/indoor/volleyball.jpg"),
+("indoor", "wind tunnel", "/img/activities/indoor/windtunnel.jpg"),
 
 
 ### mountain ### 
