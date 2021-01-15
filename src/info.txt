@@ -7,103 +7,28 @@ create table activities(
     PRIMARY KEY (id)
 )
 
-### Categories ###
-
-db.session.add(Categories(
-        name = "motor",
-        link = "/img/categories/mechanic.jpg"
-    ))
-    db.session.add(Categories(
-        name = "water",
-        link = "/img/categories/water.jpg"
-    ))
-    db.session.add(Categories(
-        name = "air",
-        link = "/img/categories/air.jpg"
-    ))
-    db.session.add(Categories(
-        name = "wheel",
-        link = "/img/categories/wheel.jpg"
-    ))
-    db.session.add(Categories(
-        name = "shooting",
-        link = "/img/categories/shooting.jpg"
-    ))
-    db.session.add(Categories(
-        name = "animal",
-        link = "/img/categories/animal.jpg"
-    ))
-    db.session.add(Categories(
-        name = "mountain",
-        link = "/img/categories/mountain.jpg"
-    ))
-    db.session.add(Categories(
-        name = "indoor",
-        link = "/img/categories/indoor.jpg"
-    ))
-    db.session.add(Categories(
-        name = "outdoor",
-        link = "/img/categories/outdoor.jpg"
-    ))
-    db.session.add(Categories(
-        name = "ticket",
-        link = "/img/categories/ticket.jpg"
-    ))
-    db.session.add(Categories(
-        name = "vip",
-        link = "/img/categories/vip.jpg"
-    ))
-
-### VIP ###
-db.session.add(Activities(
-        cat = "vip",
-        name = "bodyguard",
-        link = "/img/activities/vip/bodyguard.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "chauffeur",
-        link = "/img/activities/vip/chauffeur.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "concierge",
-        link = "/img/activities/vip/concierge.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "event",
-        link = "/img/activities/vip/event.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "luxury car",
-        link = "/img/activities/vip/luxurycar.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "luxury house",
-        link = "/img/activities/vip/luxuryhouse.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "private helicopter",
-        link = "/img/activities/vip/privatehelicopter.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "private jet",
-        link = "/img/activities/vip/privatejet.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "V.I.P Table",
-        link = "/img/activities/vip/viptable.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "vip",
-        name = "yacht",
-        link = "/img/activities/vip/yacht.jpg"
+insert into activities (cat, name, path) value 
+("category", "motor", "/img/categories/mechanic.jpg"),
+("category", "water", "/img/categories/water.jpg"),
+("category", "air", "/img/categories/air.jpg"),
+("category", "wheel", "/img/categories/wheel.jpg"),
+("category", "shooting", "/img/categories/shooting.jpg"),
+("category", "animal", "/img/categories/animal.jpg"),
+("category", "mountain", "/img/categories/mountain.jpg"),
+("category", "indoor", "/img/categories/indoor.jpg"),
+("category", "outdoor", "/img/categories/outdoor.jpg"),
+("category", "ticket", "/img/categories/ticket.jpg"),
+("category", "vip", "/img/categories/vip.jpg"),
+("vip", "bodyguard", "/img/activities/vip/bodyguard.jpg"),
+("vip", "chauffeur", "/img/activities/vip/chauffeur.jpg"),
+("vip", "concierge", "/img/activities/vip/concierge.jpg"),
+("vip", "event", "/img/activities/vip/event.jpg"),
+("vip", "luxury car", "/img/activities/vip/luxurycar.jpg"),
+("vip", "luxury house", "/img/activities/vip/luxuryhouse.jpg"),
+("vip", "private helicopter", "/img/activities/vip/privatehelicopter.jpg"),
+("vip", "private jet", "/img/activities/vip/privatejet.jpg"),
+("vip", "V.I.P Table", "/img/activities/vip/viptable.jpg"),
+("vip", "yacht", "/img/activities/vip/yacht.jpg"),
 
 ### Tikets ###
 db.session.add(Activities(
