@@ -122,173 +122,40 @@ insert into activities (cat, name, path) value
 ("wheel", "minicar", "/img/activities/wheel/minicar.jpg"),
 ("wheel", "roller", "/img/activities/wheel/roller.jpg"),
 ("wheel", "segway", "/img/activities/wheel/segway.jpg"),
+("water", "boat", "/img/activities/water/boat.jpg"),
+("water", "exotic boat", "/img/activities/water/exoticboat.jpg"),
+("water", "gondolas", "/img/activities/water/gondolas.jpg"),
+("water", "jet ski", "/img/activities/water/jetskiing.jpg"),
+("water", "kayak", "/img/activities/water/kayak.jpg"),
+("water", "kite surf", "/img/activities/water/kitesurfing.jpg"),
+("water", "outrigger canoes", "/img/activities/water/outriggercanoes.jpg"),
+("water", "paddle board", "/img/activities/water/paddleboarding.jpg"),
+("water", "parasailing", "/img/activities/water/parasailing.jpg"),
+("water", "pirogue", "/img/activities/water/pirogue.jpg"),
+("water", "rafting", "/img/activities/water/rafting.jpg"),
+("water", "rowing", "/img/activities/water/rowing.jpg"),
+("water", "sailing", "/img/activities/water/sailing.jpg"),
+("water", "scubadiving", "/img/activities/water/scubadiving.jpg"),
+("water", "sea breacher", "/img/activities/water/seabreacher.jpg"),
+("water", "shark cage", "/img/activities/water/sharkcage.jpg"),
+("water", "snorkeling", "/img/activities/water/snorkeling.jpg"),
+("water", "spear fishing", "/img/activities/water/spearfishing.jpg"),
+("water", "submarine", "/img/activities/water/submarine.jpg"),
+("water", "surfing", "/img/activities/water/surfing.jpg"),
+("water", "swim dolphins", "/img/activities/water/swimdolphins.jpg"),
+("water", "thai boat", "/img/activities/water/thaiboat.jpg"),
+("water", "trampoline water", "/img/activities/water/trampolinewater.jpg"),
+("water", "underwater photo", "/img/activities/water/underwaterphoto.jpg"),
+("water", "underwater scooter", "/img/activities/water/underwaterscooter.jpg"),
+("water", "wakeboarding", "/img/activities/water/wakeboarding.jpg"),
+("water", "water aerobic", "/img/activities/water/wateraerobic.jpg"),
+("water", "water basketball", "/img/activities/water/waterbasketball.jpg"),
+("water", "water jetpack", "/img/activities/water/waterjetpack.jpg"),
+("water", "water jump", "/img/activities/water/waterjump.jpg"),
+("water", "water polo", "/img/activities/water/waterpolo.jpg"),
+("water", "water ski", "/img/activities/water/waterskiing.jpg"),
+("water", "windsurf", "/img/activities/water/windsurfing.jpg"),
 
-### water ###
-db.session.add(Activities(
-        cat = "water",
-        name = "boat",
-        link = "/img/activities/water/boat.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "exotic boat",
-        link = "/img/activities/water/exoticboat.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "gondolas",
-        link = "/img/activities/water/gondolas.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "jet ski",
-        link = "/img/activities/water/jetskiing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "kayak",
-        link = "/img/activities/water/kayak.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "kite surf",
-        link = "/img/activities/water/kitesurfing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "outrigger canoes",
-        link = "/img/activities/water/outriggercanoes.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "paddle board",
-        link = "/img/activities/water/paddleboarding.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "parasailing",
-        link = "/img/activities/water/parasailing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "pirogue",
-        link = "/img/activities/water/pirogue.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "rafting",
-        link = "/img/activities/water/rafting.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "rowing",
-        link = "/img/activities/water/rowing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "sailing",
-        link = "/img/activities/water/sailing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "scubadiving",
-        link = "/img/activities/water/scubadiving.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "sea breacher",
-        link = "/img/activities/water/seabreacher.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "shark cage",
-        link = "/img/activities/water/sharkcage.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "snorkeling",
-        link = "/img/activities/water/snorkeling.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "spear fishing",
-        link = "/img/activities/water/spearfishing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "submarine",
-        link = "/img/activities/water/submarine.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "surfing",
-        link = "/img/activities/water/surfing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "swim dolphins",
-        link = "/img/activities/water/swimdolphins.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "thai boat",
-        link = "/img/activities/water/thaiboat.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "trampoline water",
-        link = "/img/activities/water/trampolinewater.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "underwater photo",
-        link = "/img/activities/water/underwaterphoto.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "underwater scooter",
-        link = "/img/activities/water/underwaterscooter.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "wakeboarding",
-        link = "/img/activities/water/wakeboarding.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "water aerobic",
-        link = "/img/activities/water/wateraerobic.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "water basketball",
-        link = "/img/activities/water/waterbasketball.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "water jetpack",
-        link = "/img/activities/water/waterjetpack.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "water jump",
-        link = "/img/activities/water/waterjump.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "water polo",
-        link = "/img/activities/water/waterpolo.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "water ski",
-        link = "/img/activities/water/waterskiing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "water",
-        name = "windsurf",
-        link = "/img/activities/water/windsurfing.jpg"
-    ))
 
 ### air ###
 db.session.add(Activities(
