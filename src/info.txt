@@ -29,38 +29,28 @@ insert into activities (cat, name, path) value
 ("vip", "private jet", "/img/activities/vip/privatejet.jpg"),
 ("vip", "V.I.P Table", "/img/activities/vip/viptable.jpg"),
 ("vip", "yacht", "/img/activities/vip/yacht.jpg"),
-
-### Tikets ###
-db.session.add(Activities(
-        cat = "ticket",
-        name = "circus tickets",
-        link = "/img/activities/ticket/circus.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "ticket",
-        name = "concert tickets",
-        link = "/img/activities/ticket/concert.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "ticket",
-        name = "opera tickets",
-        link = "/img/activities/ticket/opera.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "ticket",
-        name = "sports tickets",
-        link = "/img/activities/ticket/sports.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "ticket",
-        name = "theater tickets",
-        link = "/img/activities/ticket/theater.jpg"
-    ))
-    db.session.commit()
-    return jsonify({
-        'Activities': 'Added!',
-        'msg': 'Activities Successfully Added'
-    })
+("ticket", "circus tickets", "/img/activities/ticket/circus.jpg"),
+("ticket", "concert tickets", "/img/activities/ticket/concert.jpg"),
+("ticket", "opera tickets", "/img/activities/ticket/opera.jpg"),
+("ticket", "sports tickets", "/img/activities/ticket/sports.jpg"),
+("ticket", "theater tickets", "/img/activities/ticket/theater.jpg"),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
+("outdoor", "", ""),
 
 ### outdoor ### 
 db.session.add(Activities(
