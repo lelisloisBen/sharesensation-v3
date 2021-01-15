@@ -90,89 +90,23 @@ insert into activities (cat, name, path) value
 ("indoor", "trampoline", "/img/activities/indoor/trampoline.jpg"),
 ("indoor", "volleyball", "/img/activities/indoor/volleyball.jpg"),
 ("indoor", "wind tunnel", "/img/activities/indoor/windtunnel.jpg"),
+("mountain", "bobsled", "/img/activities/mountain/bobsled.jpg"),
+("mountain", "cross-country skiing", "/img/activities/mountain/crosscountryskiing.jpg"),
+("mountain", "dogsled", "/img/activities/mountain/dogsled.jpg"),
+("mountain", "horsesled", "/img/activities/mountain/horsesled.jpg"),
+("mountain", "igloo", "/img/activities/mountain/igloo.jpg"),
+("mountain", "mountain bike", "/img/activities/mountain/mountainbike.jpg"),
+("mountain", "rock climbing", "/img/activities/mountain/rockclimbing.jpg"),
+("mountain", "scooter bike", "/img/activities/mountain/scooterbike.jpg"),
+("mountain", "ski", "/img/activities/mountain/skiing.jpg"),
+("mountain", "skijoring", "/img/activities/mountain/skijore.jpg"),
+("mountain", "snowbike", "/img/activities/mountain/snowbike.jpg"),
+("mountain", "snowboard", "/img/activities/mountain/snowboard.jpg"),
+("mountain", "snowkite", "/img/activities/mountain/snowkite.jpg"),
+("mountain", "snowmobile", "/img/activities/mountain/snowmobile.jpg"),
+("mountain", "snowshoes", "/img/activities/mountain/snowshoes.jpg"),
+("mountain", "speedskiing", "/img/activities/mountain/speedskiing.jpg"),
 
-
-### mountain ### 
-db.session.add(Activities(
-        cat = "mountain",
-        name = "bobsled",
-        link = "/img/activities/mountain/bobsled.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "cross-country skiing",
-        link = "/img/activities/mountain/crosscountryskiing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "dogsled",
-        link = "/img/activities/mountain/dogsled.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "horsesled",
-        link = "/img/activities/mountain/horsesled.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "igloo",
-        link = "/img/activities/mountain/igloo.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "mountain bike",
-        link = "/img/activities/mountain/mountainbike.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "rock climbing",
-        link = "/img/activities/mountain/rockclimbing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "scooter bike",
-        link = "/img/activities/mountain/scooterbike.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "ski",
-        link = "/img/activities/mountain/skiing.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "skijoring",
-        link = "/img/activities/mountain/skijore.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "snowbike",
-        link = "/img/activities/mountain/snowbike.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "snowboard",
-        link = "/img/activities/mountain/snowboard.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "snowkite",
-        link = "/img/activities/mountain/snowkite.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "snowmobile",
-        link = "/img/activities/mountain/snowmobile.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "snowshoes",
-        link = "/img/activities/mountain/snowshoes.jpg"
-    ))
-    db.session.add(Activities(
-        cat = "mountain",
-        name = "speedskiing",
-        link = "/img/activities/mountain/speedskiing.jpg"
-    ))
 
 ### shooting ###
 db.session.add(Activities(
