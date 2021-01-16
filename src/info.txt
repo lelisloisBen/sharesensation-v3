@@ -1,3 +1,21 @@
+create table Consultants(
+   id INT NOT NULL AUTO_INCREMENT,
+   email VARCHAR(120),
+   firstname VARCHAR(120),
+   lastname VARCHAR(120),
+   password VARCHAR(80) NOT NULL,
+   avatar VARCHAR(220),
+   wallet FLOAT(5) DEFAULT 0,
+   birthdate VARCHAR(120),
+   gender VARCHAR(120),
+   address VARCHAR(120),
+   city VARCHAR(120),
+   state VARCHAR(120),
+   zipCode VARCHAR(120),
+   phone VARCHAR(120),
+   admin INT NOT NULL DEFAULT 0,
+   PRIMARY KEY ( id )
+);
 
 create table activities(
     id INT NOT NULL AUTO_INCREMENT,
