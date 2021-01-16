@@ -1,3 +1,6 @@
 Flask
 gunicorn
 Flask-Cors
+flask-sqlalchemy
+Flask-MySQLdb
+flask_jwt_simple
