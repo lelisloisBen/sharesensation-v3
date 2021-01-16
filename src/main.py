@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import APIException
-from models import db, users
+from models import db, users, activities
 
 app = Flask(__name__)
 CORS(app)
@@ -42,6 +42,19 @@ def handle_login():
               'phone': user.phone,
               'admin': user.admin
               })
+
+@app.route('/activities', methods=['GET'])
+def handle_activities():
+
+    if request.method == 'GET':
+        allActivities = activities.query.all()
+
+        if not allActivities:
+            return jsonify({'msg':'Activities not found'}), 404
+
+        return jsonify( [x.serialize() for x in allActivities] ), 200
+
+    return "Invalid Method", 404
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
