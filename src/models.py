@@ -30,5 +30,12 @@ class Users(db.Model):
             "lastname": self.lastname,
             "avatar": self.avatar,
             "wallet": self.wallet,
+            "birthdate": self.birthdate,
+            "gender": self.gender,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "zipCode": self.zipCode,
+            "phone": self.phone,
             "admin": self.admin
         }
