@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from utils import APIException
+from utils import APIException, sha256
 from models import db, users, activities
 
 app = Flask(__name__)
