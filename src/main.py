@@ -73,7 +73,8 @@ def handle_register():
         email = body['email'],
         firstname = body['firstname'],
         lastname = body['lastname'],
-        password = sha256(body['password'])
+        password = sha256(body['password']),
+        admin = 0
     ))
     db.session.commit()
 
