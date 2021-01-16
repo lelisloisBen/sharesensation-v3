@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Users(db.Model):
+class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     firstname = db.Column(db.String(120), nullable=False)
@@ -20,7 +20,7 @@ class Users(db.Model):
     admin = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<Users %r>' % self.email
+        return '<users %r>' % self.email
 
     def serialize(self):
         return {

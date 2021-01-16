@@ -1,4 +1,4 @@
-create table Consultants(
+create table users(
    id INT NOT NULL AUTO_INCREMENT,
    email VARCHAR(120),
    firstname VARCHAR(120),
