@@ -23,7 +23,7 @@ create table activities(
     name VARCHAR(100),
     path VARCHAR(220),
     PRIMARY KEY (id)
-)
+);
 
 insert into activities (cat, name, path) value 
 ("category", "motor", "/img/categories/mechanic.jpg"),
@@ -217,6 +217,6 @@ insert into activities (cat, name, path) value
 ("motor", "sidecar", "/img/activities/motor/sidecar.jpg"),
 ("motor", "sportive", "/img/activities/motor/sportive.jpg"),
 ("motor", "sportive-car", "/img/activities/motor/sportivecar.jpg"),
-("motor", "tuk-tuk", "/img/activities/motor/tuktuk.jpg")
+("motor", "tuk-tuk", "/img/activities/motor/tuktuk.jpg");
 
 
