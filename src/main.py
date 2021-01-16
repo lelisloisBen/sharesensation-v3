@@ -2,9 +2,15 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import APIException, sha256
 from models import db, users, activities
+from flask_jwt_simple import JWTManager, jwt_required, create_jwt
+import os
 
 app = Flask(__name__)
+app.config.from_object("config")
+db.init_app(app)
 CORS(app)
+jwt = JWTManager(app)
+
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)
