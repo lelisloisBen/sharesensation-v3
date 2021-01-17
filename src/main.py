@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.config.from_object("config")
 db.init_app(app)
 CORS(app)
+app.config['JWT_SECRET_KEY'] = 'dfsh3289349yhoelqwru9g'
 jwt = JWTManager(app)
 
 
