@@ -3,4 +3,4 @@ gunicorn
 Flask-Cors
 flask-sqlalchemy
 Flask-MySQLdb
-flask_jwt_simple=0.0.2
+flask_jwt_simple 0.0.3
