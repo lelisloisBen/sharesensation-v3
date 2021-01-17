@@ -62,7 +62,7 @@ insert into activities (cat, name, path) value
 ("outdoor", "golf", "/img/activities/outdoor/golf.jpg"),
 ("outdoor", "guide", "/img/activities/outdoor/guide.jpg"),
 ("outdoor", "land sailing", "/img/activities/outdoor/landsailing.jpg"),
-("outdoor", "soccer", "/img/activities/outdoor/soccer.jp"),
+("outdoor", "soccer", "/img/activities/outdoor/soccer.jpg"),
 ("outdoor", "softball", "/img/activities/outdoor/softball.jpg"),
 ("outdoor", "street hockey", "/img/activities/outdoor/streethockey.jpg"),
 ("outdoor", "tennis", "/img/activities/outdoor/tennis.jpg"),
