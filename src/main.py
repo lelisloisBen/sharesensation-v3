@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import APIException, sha256
 from models import db, users, activities
-from flask_jwt_simple import JWTManager, jwt_required, create_jwt
+# from flask_jwt_simple import JWTManager, jwt_required, create_jwt
 import os
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app.config.from_object("config")
 db.init_app(app)
 CORS(app)
 # app.config['JWT_SECRET_KEY'] = 'dfsh3289349yhoelqwru9g'
-jwt = JWTManager(app)
+# jwt = JWTManager(app)
 
 
 # Handle/serialize errors like a JSON object
@@ -33,7 +33,7 @@ def handle_login():
         return 'User not found', 404
 
     return jsonify({
-              'token': create_jwt(identity=1),
+            #   'token': create_jwt(identity=1),
               'id': user.id,
               'email': user.email,
               'firstname': user.firstname,
