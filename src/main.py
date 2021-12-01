@@ -98,6 +98,20 @@ def handle_activities():
 
     return "Invalid Method", 404
 
+@app.route('/activitiesbycategory', methods=['POST'])
+def handle_activities_by_category():
+    body = request.get_json()
+
+    if request.method == 'POST':
+        GetAllActivitiesByCategory = activities.query.filter_by(cat=body['category']).all()
+
+        if not GetAllActivitiesByCategory:
+            return jsonify({'msg':'Activities not found'}), 404
+
+        return jsonify( [x.serialize() for x in GetAllActivitiesByCategory] ), 200
+
+    return "Invalid Method", 404
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
