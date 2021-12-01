@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config.from_object("config")
 db.init_app(app)
 CORS(app)
-app.config['JWT_SECRET_KEY'] = 'dfsh3289349yhoelqwru9g'
+# app.config['JWT_SECRET_KEY'] = 'dfsh3289349yhoelqwru9g'
 jwt = JWTManager(app)
 
 
@@ -33,7 +33,7 @@ def handle_login():
         return 'User not found', 404
 
     return jsonify({
-              'token': create_jwt(identity=body['email']),
+              'token': create_jwt(identity=1),
               'id': user.id,
               'email': user.email,
               'firstname': user.firstname,
