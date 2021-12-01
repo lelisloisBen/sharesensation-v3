@@ -33,7 +33,7 @@ def handle_login():
         return 'User not found', 404
 
     return jsonify({
-              'token': create_jwt(identity=1),
+              'token': create_jwt(identity=body['email']),
               'id': user.id,
               'email': user.email,
               'firstname': user.firstname,
