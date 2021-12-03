@@ -231,7 +231,7 @@ create table saletaxes(
     PRIMARY KEY (id)
 );
 
-insert into activities (country, state, rate) value 
+insert into saletaxes (country, state, letters, rate) value 
 ("usa", "alabama", "AL", "4.000"),
 ("usa", "alaska", "AK", "0.000"),
 ("usa", "arizona", "AZ", "5.600"),
