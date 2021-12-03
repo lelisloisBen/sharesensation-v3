@@ -112,6 +112,19 @@ def handle_activities_by_category():
 
     return "Invalid Method", 404
 
+@app.route('/saletaxes', methods=['GET'])
+def handle_saletaxes():
+
+    if request.method == 'GET':
+        saletaxes = saletaxes.query.all()
+
+        if not saletaxes:
+            return jsonify({'msg':'Sale Taxes not found'}), 404
+
+        return jsonify( [x.serialize() for x in saletaxes] ), 200
+
+    return "Invalid Method", 404
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
