@@ -116,12 +116,12 @@ def handle_activities_by_category():
 def handle_saletaxes():
 
     if request.method == 'GET':
-        saletaxes = saletaxes.query.all()
+        allSaletaxes = saletaxes.query.all()
 
-        if not saletaxes:
+        if not allSaletaxes:
             return jsonify({'msg':'Sale Taxes not found'}), 404
 
-        return jsonify( [x.serialize() for x in saletaxes] ), 200
+        return jsonify( [x.serialize() for x in allSaletaxes] ), 200
 
     return "Invalid Method", 404
 
