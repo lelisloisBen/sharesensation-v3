@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import APIException, sha256
-from models import db, users, activities
+from models import db, users, activities, saletaxes
 # from flask_jwt_simple import JWTManager, jwt_required, create_jwt
 import os
 
