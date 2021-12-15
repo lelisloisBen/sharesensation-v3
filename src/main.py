@@ -127,7 +127,8 @@ def handle_saletaxes():
 
 @app.route('/saletaxesbystate', methods=['POST'])
 def handle_saletaxes_by_state():
-
+    body = request.get_json()
+    
     if request.method == 'POST':
         GetTaxByState = saletaxes.query.filter_by(state=body['state']).all()
 
