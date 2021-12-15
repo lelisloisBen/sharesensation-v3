@@ -125,6 +125,19 @@ def handle_saletaxes():
 
     return "Invalid Method", 404
 
+@app.route('/saletaxesbystate', methods=['POST'])
+def handle_saletaxes_by_state():
+
+    if request.method == 'POST':
+        GetTaxByState = saletaxes.query.filter_by(state=body['state']).all()
+
+        if not GetTaxByState:
+            return jsonify({'msg':'Sale Taxes not found for this state'}), 404
+
+        return jsonify( [x.serialize() for x in GetTaxByState] ), 200
+
+    return "Invalid Method", 404
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
