@@ -128,14 +128,14 @@ def handle_saletaxes():
 @app.route('/saletaxesbystate', methods=['POST'])
 def handle_saletaxes_by_state():
     body = request.get_json()
-    
+
     if request.method == 'POST':
         GetTaxByState = saletaxes.query.filter_by(state=body['state']).all()
 
         if not GetTaxByState:
             return jsonify({'msg':'Sale Taxes not found for this state'}), 404
 
-        return jsonify( [x.serialize() for x in GetTaxByState] ), 200
+        return jsonify( [x.serialize() for x in GetTaxByState["rate"]] ), 200
 
     return "Invalid Method", 404
 
