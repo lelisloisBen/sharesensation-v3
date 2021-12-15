@@ -135,7 +135,7 @@ def handle_saletaxes_by_state():
         if not GetTaxByState:
             return jsonify({'msg':'Sale Taxes not found for this state'}), 404
 
-        return jsonify( [x.serialize() for x in GetTaxByState["rate"]] ), 200
+        return jsonify( [x.serialize() for x in GetTaxByState[3]] ), 200
 
     return "Invalid Method", 404
 
