@@ -50,6 +50,13 @@ def handle_login():
               'admin': user.admin
               })
 
+@app.route('/signup', methods=['POST'])
+def handle_signup():
+
+    return jsonify({
+        'msg': 'Test'
+    })
+
 @app.route('/register', methods=['POST'])
 def handle_register():
 
