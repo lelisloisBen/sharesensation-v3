@@ -53,8 +53,13 @@ def handle_login():
 @app.route('/signup', methods=['POST'])
 def handle_signup():
 
+    body = request.get_json()
+
+    testing = body['test']
+
     return jsonify({
-        'msg': 'Test'
+        'msg': 'Test 1',
+        'content': testing
     })
 
 @app.route('/register', methods=['POST'])
