@@ -104,7 +104,7 @@ def twitter_callback(*args, **kwargs):
             try:
                 first_name, last_name = split_name(res.screen_name)
                 user = User(
-                    email = res.email,
+                    # email = res.email,
                     firstname = first_name,
                     lastname = last_name,
                     confirmed=True,
