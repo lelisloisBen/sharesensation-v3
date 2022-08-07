@@ -102,7 +102,8 @@ def twitter_callback(*args, **kwargs):
             # token=token,
         )
 
-    app.logger.critical("Facebook is_signup:", session.get('is_signup', False))
+    app.logger.critical("!!!!!!!!!!!!!!!!!!!")
+    app.logger.critical("Twitter is_signup:", session.get('is_signup', False))
     if session.get('is_signup', False):
         error = False
         if not oauth.user:
