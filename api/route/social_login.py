@@ -77,7 +77,7 @@ def twitter_callback(*args, **kwargs):
     oauth_verifier = args['oauth_verifier']
     auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
     auth.request_token = {'oauth_token': oauth_token, 'oauth_token_secret': oauth_verifier}
-    auth.get_access_token(oauth_verifier)
+    token, secret = auth.get_access_token(oauth_verifier)
 
     api = tweepy.API(auth)
     res = api.verify_credentials(include_email='true')
@@ -94,7 +94,7 @@ def twitter_callback(*args, **kwargs):
             provider="twitter",
             provider_user_id=str(res.id),
             provider_user_login=twitter_user_login,
-            # token=token,
+            token=token,
         )
 
     if session.get('is_signup', False):
@@ -103,7 +103,7 @@ def twitter_callback(*args, **kwargs):
             try:
                 first_name, last_name = split_name(res.screen_name)
                 user = User(
-                    # email = res.email,
+                    email = res.email,
                     firstname = first_name,
                     lastname = last_name,
                     confirmed=True,
@@ -158,7 +158,7 @@ def google_logged_in(blueprint, token):
             provider=blueprint.name,
             provider_user_id=google_info["id"],
             provider_user_login=google_user_login,
-            # token=token,
+            token=token,
         )
 
     if session.get('is_signup', False):
