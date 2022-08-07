@@ -114,9 +114,11 @@ def twitter_callback(*args, **kwargs):
                 oauth.user = user
                 db.session.add_all([user, oauth])
                 db.session.commit()
-            except:
+            except Exception as e:
+                app.logger.critical(str(e))
                 error = True
         else:
+            app.logger.critical("@@@@@@@@@@@@@@@@@@@")
             error = True
         if error:
             return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
