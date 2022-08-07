@@ -75,18 +75,13 @@ def twitter_callback(*args, **kwargs):
     args = request.args
     oauth_token = args['oauth_token']
     oauth_verifier = args['oauth_verifier']
-    app.logger.critical(oauth_token, oauth_verifier)
     auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
     auth.request_token = {'oauth_token': oauth_token, 'oauth_token_secret': oauth_verifier}
-    app.logger.critical('before access token')
     auth.get_access_token(oauth_verifier)
-    app.logger.critical('after token')
 
     api = tweepy.API(auth)
-    app.logger.critical('aftr api')
     res = api.verify_credentials(include_email='true')
 
-    app.logger.critical(res)
     query = OAuth.query.filter_by(
         provider = "twitter", provider_user_id = str(res.id)
     )   
@@ -102,8 +97,6 @@ def twitter_callback(*args, **kwargs):
             # token=token,
         )
 
-    app.logger.critical("!!!!!!!!!!!!!!!!!!!")
-    app.logger.critical("Twitter is_signup:", session.get('is_signup', False))
     if session.get('is_signup', False):
         error = False
         if not oauth.user:
@@ -207,19 +200,16 @@ def google_error(blueprint, message, response):
 
 @oauth_authorized.connect_via(facebook_blueprint)
 def facebook_logged_in(blueprint,token):
-    app.logger.critical("Facebook token:", token)      
     if not token:
         flash("Failed to log in.", category="error")
         return 
 
     resp = blueprint.session.get("/me?fields=id,name,email")
-    app.logger.critical("Facebook response of me:", resp, resp.ok)
     if not resp.ok:
         msg = "Failed to fetch user info."
         flash(msg, category="error")
         return 
 
-    app.logger.critical("Facebook me response json:", resp.json())
     facebook_name = resp.json()["name"]
     facebook_user_id = resp.json()["id"]
 
@@ -227,19 +217,15 @@ def facebook_logged_in(blueprint,token):
         provider = blueprint.name, 
         provider_user_id = facebook_user_id
     )
-    app.logger.critical("Facebook oauth query done")
     try:
         oauth = query.one()
-        app.logger.critical("Facebook oauth query one done")
     except NoResultFound:
         oauth = OAuth(
             provider = blueprint.name, 
             provider_user_id = facebook_user_id, 
             token = token
         )
-        app.logger.critical("Facebook new oauth made")
 
-    app.logger.critical("Facebook is_signup:", session.get('is_signup', False))
     if session.get('is_signup', False):
         error = False
         if not oauth.user:
@@ -280,20 +266,17 @@ def facebook_error(blueprint, message, response):
 
 # @oauth_authorized.connect_via(twitter_blueprint)
 # def twitter_logged_in(blueprint,token):
-#     app.logger.critical("Twitter token:")      
 #     if not token:
 #         flash("Failed to log in.", category="error")
 #         return False
 
 #     resp = blueprint.session.get("account/verify_credentials.json")
-#     app.logger.critical("Twitter response")
 #     if not resp.ok:
 #         msg = "Failed to fetch user info."
 #         flash(msg, category="error")
 #         return False
 
 #     info = resp.json()
-#     app.logger.critical("Twitter response json", info)
 #     user_id = info["id_str"]
 
 #     # Find this OAuth token in the database, or create it
@@ -301,19 +284,15 @@ def facebook_error(blueprint, message, response):
 #         provider=blueprint.name,
 #         provider_user_id=user_id,
 #     )
-#     app.logger.critical("Twitter query done")
 #     try:
 #         oauth = query.one()
-#         app.logger.critical("Twitter query one")
 #     except NoResultFound:
 #         oauth = OAuth(
 #             provider=blueprint.name,
 #             provider_user_id=user_id,
 #             token=token,
 #         )
-#         app.logger.critical("Twitter oauth created")
 
-#     app.logger.critical("twitter signup", session.get('is_signup', False))
 #     if session.get('is_signup', False):
 #         error = False
 #         if not oauth.user:
