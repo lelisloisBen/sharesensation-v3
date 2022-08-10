@@ -1,9 +1,8 @@
-from flask import Flask
+from flask import Flask, Blueprint
 from database import database
 
-# blueprint import
-from apps.app1.views import app1
-from apps.app2.views import app2
+from api import api, mail
+from api.route.auth import auth_ns
 
 def create_app():
     app = Flask(__name__)
@@ -14,8 +13,9 @@ def create_app():
     database.init_app(app)
     
     # register blueprint
-    app.register_blueprint(app1)
-    app.register_blueprint(app2, url_prefix="/app2")
+    blueprint = Blueprint('api', __name__, url_prefix='/api')
+    api.init_app(blueprint)
+    app.register_blueprint(blueprint)
     
     return app
 
