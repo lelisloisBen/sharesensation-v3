@@ -21,6 +21,9 @@ class User(db.Model):
     zipCode = db.Column(db.String(120))
     phone = db.Column(db.String(120))
     admin = db.Column(db.Integer)
+    is_active = db.Column(db.Boolean, default=True)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         return "<User %r>" % self.email

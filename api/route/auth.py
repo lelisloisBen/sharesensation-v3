@@ -1,3 +1,4 @@
+import jwt
 import datetime
 from urllib import response
 import flask
@@ -6,11 +7,12 @@ from api import api
 from api.schema.User import UserSchema
 from api.utils.mail import send_verify_email, valid_email_format
 from database import db
-from flask import request, Response
+from flask import request, Response, current_app as app
 from flask_login import login_user, logout_user
 from flask_restx import Resource
 from database.model.User import User
 from werkzeug.security import check_password_hash, generate_password_hash
+from functools import wraps
 
 auth_ns = api.namespace("auth", validate=True)
 
@@ -31,6 +33,25 @@ login_model = auth_ns.model(
         "password": flask_restx.fields.String(required=True),
     },
 )
+
+blacklist_token = set()
+
+def token_required(f):
+    """Verify if the token is valid."""
+    @wraps(f)
+    def decorator(*args, **kwargs):
+        token = None
+        if 'HTTP_AUTHORIZATION' in flask.request.headers.environ:
+            token = flask.request.headers.environ['HTTP_AUTHORIZATION']
+        if not token or token in blacklist_token:
+            return flask.make_response('A valid token is missing.', 401)
+        try:
+            user_info = jwt.decode(token, app.config('SECRET_KEY'), algorithms=["HS256"])
+            user = User.query.filter_by(email=user_info['email']).first()
+        except:
+            return flask.make_response('The token is invalid.', 401)
+        return f(*args, **kwargs, user=user)
+    return decorator
 
 
 @auth_ns.route("/signup")
@@ -88,17 +109,26 @@ class LoginUser(Resource):
         ):
             return "User not found", 404
 
-        login_user(user)
+        if not user.confirmed:
+            return "Email is not verified", 405
 
-        return flask.jsonify(UserSchema().dump(user))
+        exp = datetime.datetime.utcnow() + datetime.timedelta(days=1)
+        token = jwt.encode({'email': user.email, 'exp': exp}, 
+                            app.config['SECRET_KEY'], algorithm="HS256")
+
+        resp = UserSchema().dump(user)
+        resp['token'] = token
+        return flask.jsonify(resp)
 
 
 @auth_ns.route("/logout")
 class LogoutUser(Resource):
+    @token_required
     def post(self, *args, **kwargs):
         """Logout the user"""
         logout_user()
         return '{}', 200
+
 
 @auth_ns.route('/confirm-email')
 class ConfirmEmail(Resource):
