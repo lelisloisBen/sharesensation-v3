@@ -1,6 +1,8 @@
+python-dotenv
 Flask
-gunicorn
-Flask-Cors
-flask-sqlalchemy
-Flask-MySQLdb
-flask_jwt_simple
+Flask-Login
+Flask-SQLAlchemy
+Flask-JWT-Extended
+Flask-Mail
+Flask-Dance
+psycopg2-binary
