@@ -10,7 +10,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     firstname = db.Column(db.String(120), nullable=False)
     lastname = db.Column(db.String(120))
-    password = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     avatar = db.Column(db.String(220), default="avatar.png")
     wallet = db.Column(db.Float(5), default=0)
     birthdate = db.Column(db.String(120))
@@ -49,3 +49,11 @@ class User(db.Model):
             app.config["SECRET_KEY"],
             algorithm="HS256",
         )
+
+    @staticmethod
+    def verify_email_token(token):
+        try:
+            email = jwt.decode(token, app.config["SECRET_KEY"], algorithms="HS256")["verify_email"]
+        except:
+            return
+        return User.query.filter_by(email=email).first()
