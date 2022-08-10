@@ -20,6 +20,12 @@ def create_app():
   # app.config['MAIL_PORT'] = 587
   app.config['MAIL_SERVER'] = '127.0.0.1'
   app.config['MAIL_PORT'] = 1025
+  app.config['GOOGLE_CLIENT_ID'] = os.environ.get('GOOGLE_CLIENT_ID')
+  app.config['GOOGLE_CLIENT_SECRET'] = os.environ.get('GOOGLE_CLIENT_SECRET')
+  app.config['FACEBOOK_CLIENT_ID'] = os.environ.get('FACEBOOK_CLIENT_ID')
+  app.config['FACEBOOK_CLIENT_SECRET'] = os.environ.get('FACEBOOK_CLIENT_SECRET')
+  app.config['TWIITER_API_KEY'] = os.environ.get('TWIITER_API_KEY')
+  app.config['TWITTER_API_SECRET'] = os.environ.get('TWITTER_API_SECRET')
   # app.config['MAIL_USE_TLS'] = True
 
   db.init_app(app)
@@ -33,16 +39,16 @@ def create_app():
 
   from .models import User, OAuth
 
-  @login_manager.user_loader
-  def load_user(user_id):
-    return User.query.get(int(user_id))
+  # @login_manager.user_loader
+  # def load_user(user_id):
+  #   return User.query.get(int(user_id))
 
   #blueprints auth routes
   from .auth import auth as auth_blueprint
   app.register_blueprint(auth_blueprint)
 
-  from .social_login import github_blueprint
-  app.register_blueprint(github_blueprint, url_prefix = "/login")
+  # from .social_login import github_blueprint
+  # app.register_blueprint(github_blueprint, url_prefix = "/login")
 
   from .social_login import google_blueprint
   app.register_blueprint(google_blueprint, url_prefix = "/login")
