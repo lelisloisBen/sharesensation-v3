@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint
-from database import database
+import database
 
 from api import api, mail
 from api.route.auth import auth_ns

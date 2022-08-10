@@ -1,5 +1,5 @@
 import re
-from utils import render_template
+from flask import render_template
 from flask_mail import Message
 from api import mail
 
