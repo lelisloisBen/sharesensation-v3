@@ -72,52 +72,46 @@ def google_logged_in(blueprint, token):
     query = OAuth.query.filter_by(
         provider = blueprint.name, provider_user_id = google_info["id"]
     )   
-    logger.info("AAAAAAAA") 
     try:
         oauth = query.one()
-        logger.info("BBBBBBBB")
     except NoResultFound:
-        logger.info("CCCCCCCCC")
         google_user_login = google_info["name"]
 
-        logger.info("DDDDDDDDD")
         oauth = OAuth(
             provider=blueprint.name,
             provider_user_id=google_info["id"],
             provider_user_login=google_user_login,
             token=token,
         )
-        logger.info("EEEEEEEEEEEEE")
 
-    # if session.get('is_signup', False):
-    #     error = False
-    #     if not oauth.user:
-    #         try:
-    #             user = User(
-    #                 email = google_info["email"],
-    #                 firstname = google_info["given_name"],
-    #                 lastname = google_info["family_name"],
-    #                 # avatar = google_info["picture"],
-    #             )
+    if session.get('is_signup', False):
+        error = False
+        if not oauth.user:
+            try:
+                user = User(
+                    email = google_info["email"],
+                    firstname = google_info["given_name"],
+                    lastname = google_info["family_name"],
+                    # avatar = google_info["picture"],
+                )
 
-    #             oauth.user = user
-    #             db.session.add_all([user, oauth])
-    #             db.session.commit()
-    #         except:
-    #             error = True
-    #     else:
-    #         error = True
-    #     if error:
-    #         return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
-    # else:
-    #     user = oauth.user
-    #     if not user:
-    #         # del google_blueprint.token
-    #         return redirect(app.config['FRONTEND_URL'] + '/login?error=401')
+                oauth.user = user
+                db.session.add_all([user, oauth])
+                db.session.commit()
+            except:
+                error = True
+        else:
+            error = True
+        if error:
+            return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
+    else:
+        user = oauth.user
+        if not user:
+            # del google_blueprint.token
+            return redirect(app.config['FRONTEND_URL'] + '/login?error=401')
     
-    # token = user.get_auth_token()
-    # return redirect(app.config['FRONTEND_URL'] + '/?token=' + token)
-    return redirect(app.config['FRONTEND_URL'])
+    token = user.get_auth_token()
+    return redirect(app.config['FRONTEND_URL'] + '/?token=' + token)
 
 @oauth_error.connect_via(google_blueprint)
 def google_error(blueprint, message, response):
