@@ -64,20 +64,20 @@ def google_logged_in(blueprint, token):
     google_info = resp.json()
     print(google_info)
 
-    query = OAuth.query.filter_by(
-        provider = blueprint.name, provider_user_id = google_info["id"]
-    )    
-    try:
-        oauth = query.one()
-    except NoResultFound:
-        google_user_login = google_info["name"]
+    # query = OAuth.query.filter_by(
+    #     provider = blueprint.name, provider_user_id = google_info["id"]
+    # )    
+    # try:
+    #     oauth = query.one()
+    # except NoResultFound:
+    #     google_user_login = google_info["name"]
 
-        oauth = OAuth(
-            provider=blueprint.name,
-            provider_user_id=google_info["id"],
-            provider_user_login=google_user_login,
-            token=token,
-        )
+    #     oauth = OAuth(
+    #         provider=blueprint.name,
+    #         provider_user_id=google_info["id"],
+    #         provider_user_login=google_user_login,
+    #         token=token,
+    #     )
 
     # if session.get('is_signup', False):
     #     error = False
