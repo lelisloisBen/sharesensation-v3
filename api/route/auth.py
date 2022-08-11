@@ -46,7 +46,7 @@ def token_required(f):
         if not token or token in blacklist_token:
             return flask.make_response('A valid token is missing.', 401)
         try:
-            user_info = jwt.decode(token, app.config('SECRET_KEY'), algorithms=["HS256"])
+            user_info = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
             user = User.query.filter_by(email=user_info['email']).first()
         except:
             return flask.make_response('The token is invalid.', 401)
@@ -112,12 +112,8 @@ class LoginUser(Resource):
         if not user.confirmed:
             return "Email is not verified", 405
 
-        exp = datetime.datetime.utcnow() + datetime.timedelta(days=1)
-        token = jwt.encode({'email': user.email, 'exp': exp}, 
-                            app.config['SECRET_KEY'], algorithm="HS256")
-
         resp = UserSchema().dump(user)
-        resp['token'] = token
+        resp['token'] = user.get_auth_token()
         return flask.jsonify(resp)
 
 
@@ -146,3 +142,12 @@ class ConfirmEmail(Resource):
         db.session.commit()
 
         return '', 200
+
+@auth_ns.route("/get_info")
+class GetUserInfo(Resource):
+    @token_required
+    def get(self, *args, **kwargs):
+        """Get logined user info"""
+        user = kwargs['user']
+        resp = UserSchema().dump(user)
+        return flask.jsonify(resp)

@@ -1,5 +1,5 @@
 from time import time
-
+import datetime
 import jwt
 from database import db
 from flask import current_app as app
@@ -10,7 +10,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     firstname = db.Column(db.String(120), nullable=False)
     lastname = db.Column(db.String(120))
-    password = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(100))
     avatar = db.Column(db.String(220), default="avatar.png")
     wallet = db.Column(db.Float(5), default=0)
     birthdate = db.Column(db.String(120))
@@ -60,3 +60,9 @@ class User(db.Model):
         except:
             return
         return User.query.filter_by(email=email).first()
+
+    def get_auth_token(self):
+        exp = datetime.datetime.utcnow() + datetime.timedelta(days=1)
+        token = jwt.encode({'email': self.email, 'exp': exp}, 
+                            app.config['SECRET_KEY'], algorithm="HS256")
+        return token
