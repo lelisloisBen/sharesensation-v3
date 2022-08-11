@@ -33,5 +33,5 @@ def send_by_mailgun(recipient, subject, text):
         data={"from": "Samirbenzada@gmail.com",
               "to": recipient,
               "subject": subject,
-              "text": text})
+              "html": text})
     # print(res, res.json())
