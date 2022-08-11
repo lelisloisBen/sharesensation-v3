@@ -4,6 +4,7 @@ from flask_cors import CORS
 from api import api, mail
 from api.route.auth import auth_ns
 
+
 def create_app():
     app = Flask(__name__)
     # setup with the configuration provided
@@ -31,5 +32,4 @@ def create_app():
     
     return app
 
-if __name__ == "__main__":
-    create_app().run()
+app = create_app()
