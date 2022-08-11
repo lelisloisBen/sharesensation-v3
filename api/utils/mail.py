@@ -2,6 +2,8 @@ import re
 from flask import render_template
 from flask_mail import Message
 from api import mail
+import requests
+from flask import current_app as app
 
 def valid_email_format(email):
     return bool(re.search(r"^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$", email))
@@ -9,10 +11,24 @@ def valid_email_format(email):
 def send_verify_email(user):
     token = user.get_verify_token()
 
-    msg = Message()
-    msg.subject = "Login System: Verify email"
-    msg.sender = 'username@gmail.com'
-    msg.recipients = [user.email]
-    msg.html = render_template('email/verify_email.html', user = user, token = token)
+    subject = "ShareSensation: Verify email"
+    html = render_template('email/verify_email.html', user = user, token = token)
 
-    mail.send(msg)
+    # msg = Message()
+    # msg.subject = subject
+    # # msg.sender = 'username@gmail.com'
+    # msg.recipients = [user.email]
+    # msg.html = html
+
+    # mail.send(msg)
+
+    send_by_mailgun([user.email], subject, html)
+
+def send_by_mailgun(recipient, subject, text):
+    return requests.post(
+        f"https://api.mailgun.net/v3/{app.config['MAILGUN_DOMAIN']}/messages",
+        auth=("api", app.config["MAILGUN_API_KEY"]),
+        data={"from": f"<noreply@{app.config['MAILGUN_DOMAIN']}>",
+              "to": recipient,
+              "subject": subject,
+              "text": text})

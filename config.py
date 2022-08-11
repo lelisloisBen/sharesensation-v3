@@ -11,6 +11,9 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE2_URL')
     
+    MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
+    MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
+    
     # Social Auth
     OAUTH_CREDENTIALS = {
         'google': {
