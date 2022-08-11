@@ -1,4 +1,5 @@
 from posixpath import split
+from re import L
 from flask import Flask, render_template, redirect, url_for, flash, Blueprint, session
 from flask_dance.contrib.github import make_github_blueprint, github
 from flask_dance.contrib.google import make_google_blueprint, google
@@ -15,6 +16,9 @@ from database import db
 from api import api
 from flask import request
 from api.utils.other import split_name
+import logging
+
+logger = logging.getLogger(__name__)
 
 google_blueprint = make_google_blueprint(client_id=app.config['OAUTH_CREDENTIALS']['google']['id'], client_secret=app.config['OAUTH_CREDENTIALS']['google']['secret'],  scope=[
         "openid",
@@ -64,20 +68,26 @@ def google_logged_in(blueprint, token):
     google_info = resp.json()
     print(google_info)
 
-    # query = OAuth.query.filter_by(
-    #     provider = blueprint.name, provider_user_id = google_info["id"]
-    # )    
-    # try:
-    #     oauth = query.one()
-    # except NoResultFound:
-    #     google_user_login = google_info["name"]
+    print(google_info["id"])
+    query = OAuth.query.filter_by(
+        provider = blueprint.name, provider_user_id = google_info["id"]
+    )   
+    logger.info("AAAAAAAA") 
+    try:
+        oauth = query.one()
+        logger.info("BBBBBBBB")
+    except NoResultFound:
+        logger.info("CCCCCCCCC")
+        google_user_login = google_info["name"]
 
-    #     oauth = OAuth(
-    #         provider=blueprint.name,
-    #         provider_user_id=google_info["id"],
-    #         provider_user_login=google_user_login,
-    #         token=token,
-    #     )
+        logger.info("DDDDDDDDD")
+        oauth = OAuth(
+            provider=blueprint.name,
+            provider_user_id=google_info["id"],
+            provider_user_login=google_user_login,
+            token=token,
+        )
+        logger.info("EEEEEEEEEEEEE")
 
     # if session.get('is_signup', False):
     #     error = False
