@@ -130,7 +130,7 @@ def facebook_logged_in(blueprint,token):
         flash("Failed to log in.", category="error")
         return 
 
-    resp = blueprint.session.get("/me")
+    resp = blueprint.session.get("/me?fields=id,name,email")
     if not resp.ok:
         msg = "Failed to fetch user info."
         flash(msg, category="error")
