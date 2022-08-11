@@ -12,7 +12,7 @@ def send_verify_email(user):
     token = user.get_verify_token()
 
     subject = "ShareSensation: Verify email"
-    html = render_template('email/verify_email.html', user = user, token = token)
+    html = render_template('email/verify_email.html', frontend_url = app.config["FRONTEND_URL"], user = user, token = token)
 
     # msg = Message()
     # msg.subject = subject

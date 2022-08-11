@@ -4,7 +4,7 @@
 <h2>Hi{{ username }}! </h2>
 <p>To verify your email, please click the button below:</p>
 
-<a href="http://localhost:3000/confirm-email?token={{ token }}" 
+<a href="{{ frontend_url }}/confirm-email?token={{ token }}" 
 style="background-color:#1e63b8!important;border-radius:3px!important;color:#ffffff!important;display:inline-block!important;font-family:Helvetica Neue,Helvetica,Arial,sans-serif!important;font-size:14px!important;font-weight:600!important;line-height:20px!important;text-align:center!important;text-decoration:none!important;padding:10px 25px!important;margin:0!important" 
 >Verify my <span>email</span></a>
 
