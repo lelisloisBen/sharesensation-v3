@@ -88,10 +88,11 @@ def google_logged_in(blueprint, token):
         error = False
         if not oauth.user:
             try:
+                first_name, last_name = split_name(google_info['name'])
                 user = User(
                     email = google_info["email"],
-                    firstname = google_info["given_name"],
-                    lastname = google_info["family_name"],
+                    firstname = first_name,
+                    lastname = last_name,
                     # avatar = google_info["picture"],
                 )
 
