@@ -194,35 +194,36 @@ def facebook_error(blueprint, message, response):
 def twitter_logged_in(blueprint,token):                  
     if not token:
         flash("Failed to log in.", category="error")
-        return 
+        return False
 
-    resp = blueprint.session.get('account/verify_credentials.json')
+    resp = blueprint.session.get("account/verify_credentials.json")
     if not resp.ok:
         msg = "Failed to fetch user info."
         flash(msg, category="error")
-        return 
+        return False
 
-    twitter_name = resp.json()["screen_name"]
-    twitter_user_id = resp.json()["id"]
+    info = resp.json()
+    user_id = info["id_str"]
 
+    # Find this OAuth token in the database, or create it
     query = OAuth.query.filter_by(
-        provider = blueprint.name, 
-        provider_user_id = twitter_user_id
+        provider=blueprint.name,
+        provider_user_id=user_id,
     )
     try:
         oauth = query.one()
     except NoResultFound:
         oauth = OAuth(
-            provider = blueprint.name, 
-            provider_user_id = twitter_user_id, 
-            token = token
+            provider=blueprint.name,
+            provider_user_id=user_id,
+            token=token,
         )
 
     if session.get('is_signup', False):
         error = False
         if not oauth.user:
             try:
-                first_name, last_name = split_name(twitter_name)
+                first_name, last_name = split_name(info["screen_name"])
                 user = User(
                     email = resp.json()["email"],
                     firstname = first_name,
