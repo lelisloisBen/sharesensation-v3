@@ -1,3 +1,4 @@
+from posixpath import split
 from flask import Flask, render_template, redirect, url_for, flash, Blueprint, session
 from flask_dance.contrib.github import make_github_blueprint, github
 from flask_dance.contrib.google import make_google_blueprint, google
@@ -13,6 +14,7 @@ from flask import current_app as app
 from database import db
 from api import api
 from flask import request
+from api.utils.other import split_name
 
 google_blueprint = make_google_blueprint(client_id=app.config['OAUTH_CREDENTIALS']['google']['id'], client_secret=app.config['OAUTH_CREDENTIALS']['google']['secret'],  scope=[
         "openid",
@@ -141,17 +143,34 @@ def facebook_logged_in(blueprint,token):
             token = token
         )
 
-    if oauth.user:
-        login_user(oauth.user)
-        # flash("Successfully signed in with Facebook.", 'success')
+    if session.get('is_signup', False):
+        error = False
+        if not oauth.user:
+            try:
+                first_name, last_name = split_name(facebook_name)
+                user = User(
+                    email = resp.json()["email"],
+                    firstname = first_name,
+                    lastname = last_name,
+                    # avatar = google_info["picture"],
+                )
+
+                oauth.user = user
+                db.session.add_all([user, oauth])
+                db.session.commit()
+            except:
+                error = True
+        else:
+            error = True
+        if error:
+            return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
     else:
-        user = User(username = facebook_name)
-        oauth.user = user
-        db.session.add_all([user, oauth])
-        db.session.commit()
-        login_user(user)
-        # flash("Successfully signed in with Facebook.", 'success')
-    return redirect(url_for("main.profile"))                   
+        user = oauth.user
+        if not user:
+            return redirect(app.config['FRONTEND_URL'] + '/login?error=401')
+    
+    token = user.get_auth_token()
+    return redirect(app.config['FRONTEND_URL'] + '/?token=' + token)            
 
 @oauth_error.connect_via(facebook_blueprint)
 def facebook_error(blueprint, message, response):
@@ -188,17 +207,33 @@ def twitter_logged_in(blueprint,token):
             token = token
         )
 
-    if oauth.user:
-        login_user(oauth.user)
-        # flash("Successfully signed in with Twitter.", 'success')
+    if session.get('is_signup', False):
+        error = False
+        if not oauth.user:
+            try:
+                first_name, last_name = split_name(twitter_name)
+                user = User(
+                    email = resp.json()["email"],
+                    firstname = first_name,
+                    lastname = last_name,
+                )
+
+                oauth.user = user
+                db.session.add_all([user, oauth])
+                db.session.commit()
+            except:
+                error = True
+        else:
+            error = True
+        if error:
+            return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
     else:
-        user = User(username = twitter_name)
-        oauth.user = user
-        db.session.add_all([user, oauth])
-        db.session.commit()
-        login_user(user)
-        # flash("Successfully signed in with Twitter.", 'success')
-    return redirect(url_for("main.profile"))                   
+        user = oauth.user
+        if not user:
+            return redirect(app.config['FRONTEND_URL'] + '/login?error=401')
+    
+    token = user.get_auth_token()
+    return redirect(app.config['FRONTEND_URL'] + '/?token=' + token)
 
 @oauth_error.connect_via(twitter_blueprint)
 def twitter_error(blueprint, message, response):

@@ -7,7 +7,7 @@ from flask import current_app as app
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=True)
     firstname = db.Column(db.String(120), nullable=False)
     lastname = db.Column(db.String(120))
     password = db.Column(db.String(100))
