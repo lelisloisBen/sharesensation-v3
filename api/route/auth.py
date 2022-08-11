@@ -89,11 +89,13 @@ class AuthAPI(Resource):
             )
             db.session.add(new_user)
             db.session.commit()
-
-            send_verify_email(new_user)
-            return '{}', 200
         except:
             return "Register failed", 400
+        try:
+            send_verify_email(new_user)
+        except:
+            return "Sending mail failed", 400
+        return '{}', 200
 
 
 @auth_ns.route("/login")

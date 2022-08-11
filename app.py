@@ -4,7 +4,6 @@ from flask_cors import CORS
 from api import api, mail
 from api.route.auth import auth_ns
 
-
 def create_app():
     app = Flask(__name__)
     # setup with the configuration provided
@@ -19,6 +18,7 @@ def create_app():
     with app.app_context():
         from api.route.social_login import social_ns
         from api.route.social_login import google_blueprint, facebook_blueprint, twitter_blueprint
+        import api.route.other as router_other
 
         # register blueprint
         blueprint = Blueprint('api', __name__, url_prefix='/api')
