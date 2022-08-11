@@ -14,23 +14,23 @@ class Config(object):
     # Social Auth
     OAUTH_CREDENTIALS = {
         'google': {
-            'id': '12207959911-8uha1ng75g9ic846a1r58lk6va4rdatg.apps.googleusercontent.com',
-            'secret': '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',
+            'id': os.environ.get('GOOGLE_CLIENT_ID'),
+            'secret': os.environ.get('GOOGLE_CLIENT_SECRET'),
         },
         'facebook': {
-            'id' : '',
-            'secret': '',
+            'id' : os.environ.get('FACEBOOK_CLIENT_ID'),
+            'secret': os.environ.get('FACEBOOK_CLIENT_SECRET'),
         },
         'twitter': {
-            'id': '',
-            'secret': '',
+            'id': os.environ.get('TWITTER_API_ID'),
+            'secret': os.environ.get('TWITTER_API_SECRET'),
         }
     }
 
 class ProductionConfig(Config):
     DEBUG = False
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
+    MAIL_SERVER = os.environ.get('MAIL_SERVER')
+    MAIL_PORT = os.environ.get('MAIL_PORT')
     FRONTEND_URL = 'https://sharesensation.herokuapp.com'
 
 class DevelopmentConfig(Config):
