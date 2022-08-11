@@ -1,6 +1,3 @@
-from flask import jsonify, url_for
-import hashlib
-
 class APIException(Exception):
     status_code = 400
 
@@ -15,8 +12,3 @@ class APIException(Exception):
         rv = dict(self.payload or ())
         rv['message'] = self.message
         return rv
-
-def sha256(string):
-    m = hashlib.sha256()
-    m.update(string.encode('utf-8'))
-    return m.hexdigest()
