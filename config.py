@@ -9,7 +9,7 @@ class Config(object):
     SECRET_KEY = '57e19ea558d4967a552d03deece34a70'
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('JAWSDB_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     
     # Social Auth
     OAUTH_CREDENTIALS = {
