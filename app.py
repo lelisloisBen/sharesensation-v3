@@ -8,6 +8,7 @@ def create_app():
     app = Flask(__name__)
     # setup with the configuration provided
     app.config.from_object('config.ProductionConfig')
+    # app.config.from_object('config.DevelopmentConfig')
 
     CORS(app)
     
