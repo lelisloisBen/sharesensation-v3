@@ -80,20 +80,20 @@ class AuthAPI(Resource):
         if not valid_email_format(data["email"]):
             return "Email is not correct", 400
 
-        # try:
-        new_user = User(
-            firstname=data["firstname"],
-            lastname=data["lastname"],
-            email=data["email"],
-            password=generate_password_hash(data["password"], method="sha256"),
-        )
-        db.session.add(new_user)
-        db.session.commit()
+        try:
+            new_user = User(
+                firstname=data["firstname"],
+                lastname=data["lastname"],
+                email=data["email"],
+                password=generate_password_hash(data["password"], method="sha256"),
+            )
+            db.session.add(new_user)
+            db.session.commit()
 
-        send_verify_email(new_user)
-        return '{}', 200
-        # except:
-        #     return "Register failed", 400
+            send_verify_email(new_user)
+            return '{}', 200
+        except:
+            return "Register failed", 400
 
 
 @auth_ns.route("/login")
