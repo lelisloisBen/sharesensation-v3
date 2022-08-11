@@ -1,3 +1,4 @@
+from datetime import datetime
 from posixpath import split
 from re import L
 from flask import Flask, render_template, redirect, url_for, flash, Blueprint, session
@@ -93,6 +94,8 @@ def google_logged_in(blueprint, token):
                     email = google_info["email"],
                     firstname = first_name,
                     lastname = last_name,
+                    confirmed=True,
+                    confirmed_on=datetime.now(),
                     # avatar = google_info["picture"],
                 )
 
@@ -158,6 +161,8 @@ def facebook_logged_in(blueprint,token):
                     email = resp.json()["email"],
                     firstname = first_name,
                     lastname = last_name,
+                    confirmed=True,
+                    confirmed_on=datetime.now(),
                     # avatar = google_info["picture"],
                 )
 
@@ -222,6 +227,8 @@ def twitter_logged_in(blueprint,token):
                     email = resp.json()["email"],
                     firstname = first_name,
                     lastname = last_name,
+                    confirmed=True,
+                    confirmed_on=datetime.now(),
                 )
 
                 oauth.user = user
