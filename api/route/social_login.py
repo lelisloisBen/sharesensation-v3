@@ -5,7 +5,7 @@ from flask import Flask, render_template, redirect, url_for, flash, Blueprint, s
 from flask_dance.contrib.github import make_github_blueprint, github
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.facebook import make_facebook_blueprint, facebook
-from flask_dance.contrib.twitter import make_twitter_blueprint, twitter
+from api.utils.twitter import make_twitter_blueprint, twitter
 from flask_dance.consumer import oauth_authorized, oauth_error
 from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from sqlalchemy.orm.exc import NoResultFound
