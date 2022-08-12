@@ -196,13 +196,13 @@ def facebook_error(blueprint, message, response):
 
 @oauth_authorized.connect_via(twitter_blueprint)
 def twitter_logged_in(blueprint,token):
-    app.logger.critical("Twitter token:", token)      
+    app.logger.critical("Twitter token:")      
     if not token:
         flash("Failed to log in.", category="error")
         return False
 
     resp = blueprint.session.get("account/verify_credentials.json")
-    app.logger.critical("Twitter response", resp, resp.ok)
+    app.logger.critical("Twitter response")
     if not resp.ok:
         msg = "Failed to fetch user info."
         flash(msg, category="error")
