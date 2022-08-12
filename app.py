@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template
+from flask import Flask, Blueprint
 import database
 from flask_cors import CORS
 from api import api, mail
@@ -31,10 +31,10 @@ def create_app():
         app.register_blueprint(facebook_blueprint, url_prefix = "/login")
         app.register_blueprint(twitter_blueprint, url_prefix = "/login")
     
-        @app.route('/')
-        def hello_world():
-            return "<div style='text-align: center; background-color: orange'><h1>Backend running...</h1><br/><h3>Welcome back samir</h3><img src='https://media.gettyimages.com/photos/woman-sitting-by-washing-machine-picture-id117852649?s=2048x2048' width='80%' /></div>"
     return app
 
 app = create_app()
 
+@app.route('/')
+def hello_world():
+    return "<div style='text-align: center; background-color: orange'><h1>Backend running...</h1><br/><h3>Welcome back samir</h3><img src='https://media.gettyimages.com/photos/woman-sitting-by-washing-machine-picture-id117852649?s=2048x2048' width='80%' /></div>"
