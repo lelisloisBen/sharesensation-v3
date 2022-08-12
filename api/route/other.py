@@ -18,7 +18,6 @@ from database.model.SaleTax import SaleTax
 
 @app.route('/activities', methods=['GET'])
 def handle_activities():
-    app.logger.critical("!!!!!!!!!!!!!!!!!!!")
 
     if request.method == 'GET':
         allActivities = Activity.query.all()

@@ -17,9 +17,6 @@ from database import db
 from api import api
 from flask import request
 from api.utils.other import split_name
-import logging
-
-logger = logging.getLogger(__name__)
 
 google_blueprint = make_google_blueprint(client_id=app.config['OAUTH_CREDENTIALS']['google']['id'], client_secret=app.config['OAUTH_CREDENTIALS']['google']['secret'],  scope=[
         "openid",
@@ -125,17 +122,20 @@ def google_error(blueprint, message, response):
     flash(msg, category = "error")
 
 @oauth_authorized.connect_via(facebook_blueprint)
-def facebook_logged_in(blueprint,token):                  
+def facebook_logged_in(blueprint,token):
+    app.logger.critical("Facebook token:", token)      
     if not token:
         flash("Failed to log in.", category="error")
         return 
 
     resp = blueprint.session.get("/me?fields=id,name,email")
+    app.logger.critical("Facebook response of me:", resp, resp.ok)
     if not resp.ok:
         msg = "Failed to fetch user info."
         flash(msg, category="error")
         return 
 
+    app.logger.critical("Facebook me response json:", resp.json())
     facebook_name = resp.json()["name"]
     facebook_user_id = resp.json()["id"]
 
@@ -143,15 +143,19 @@ def facebook_logged_in(blueprint,token):
         provider = blueprint.name, 
         provider_user_id = facebook_user_id
     )
+    app.logger.critical("Facebook oauth query done")
     try:
         oauth = query.one()
+        app.logger.critical("Facebook oauth query one done")
     except NoResultFound:
         oauth = OAuth(
             provider = blueprint.name, 
             provider_user_id = facebook_user_id, 
             token = token
         )
+        app.logger.critical("Facebook new oauth made")
 
+    app.logger.critical("Facebook is_signup:", session.get('is_signup', False))
     if session.get('is_signup', False):
         error = False
         if not oauth.user:
@@ -191,18 +195,21 @@ def facebook_error(blueprint, message, response):
     flash(msg, category="error")
 
 @oauth_authorized.connect_via(twitter_blueprint)
-def twitter_logged_in(blueprint,token):                  
+def twitter_logged_in(blueprint,token):
+    app.logger.critical("Twitter token:", token)      
     if not token:
         flash("Failed to log in.", category="error")
         return False
 
     resp = blueprint.session.get("account/verify_credentials.json")
+    app.logger.critical("Twitter response", resp, resp.ok)
     if not resp.ok:
         msg = "Failed to fetch user info."
         flash(msg, category="error")
         return False
 
     info = resp.json()
+    app.logger.critical("Twitter response json", info)
     user_id = info["id_str"]
 
     # Find this OAuth token in the database, or create it
@@ -210,22 +217,26 @@ def twitter_logged_in(blueprint,token):
         provider=blueprint.name,
         provider_user_id=user_id,
     )
+    app.logger.critical("Twitter query done")
     try:
         oauth = query.one()
+        app.logger.critical("Twitter query one")
     except NoResultFound:
         oauth = OAuth(
             provider=blueprint.name,
             provider_user_id=user_id,
             token=token,
         )
+        app.logger.critical("Twitter oauth created")
 
+    app.logger.critical("twitter signup", session.get('is_signup', False))
     if session.get('is_signup', False):
         error = False
         if not oauth.user:
             try:
                 first_name, last_name = split_name(info["screen_name"])
                 user = User(
-                    email = resp.json()["email"],
+                    email = info["email"],
                     firstname = first_name,
                     lastname = last_name,
                     confirmed=True,
