@@ -15,13 +15,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 from database.model.Activity import Activity
 from database.model.SaleTax import SaleTax
-import logging
-
-logger = logging.getLogger(__name__)
 
 @app.route('/activities', methods=['GET'])
 def handle_activities():
-    logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    app.logger.critical("!!!!!!!!!!!!!!!!!!!")
 
     if request.method == 'GET':
         allActivities = Activity.query.all()
