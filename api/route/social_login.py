@@ -5,7 +5,7 @@ from flask import Flask, render_template, redirect, url_for, flash, Blueprint, s
 from flask_dance.contrib.github import make_github_blueprint, github
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.facebook import make_facebook_blueprint, facebook
-from api.utils.twitter import make_twitter_blueprint, twitter
+# from api.utils.twitter import make_twitter_blueprint, twitter
 from flask_dance.consumer import oauth_authorized, oauth_error
 from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from sqlalchemy.orm.exc import NoResultFound
@@ -17,6 +17,7 @@ from database import db
 from api import api
 from flask import request
 from api.utils.other import split_name
+import tweepy
 
 google_blueprint = make_google_blueprint(client_id=app.config['OAUTH_CREDENTIALS']['google']['id'], client_secret=app.config['OAUTH_CREDENTIALS']['google']['secret'],  scope=[
         "openid",
@@ -30,13 +31,15 @@ facebook_blueprint = make_facebook_blueprint(client_id=app.config['OAUTH_CREDENT
     ]
 )
 
-twitter_blueprint = make_twitter_blueprint(api_key=app.config['OAUTH_CREDENTIALS']['twitter']['id'], api_secret=app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
+# twitter_blueprint = make_twitter_blueprint(api_key=app.config['OAUTH_CREDENTIALS']['twitter']['id'], api_secret=app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
 
 google_bp = make_google_blueprint(storage = SQLAlchemyStorage(OAuth, db.session))
 
 facebook_bp = make_facebook_blueprint(storage = SQLAlchemyStorage(OAuth, db.session))
 
-twitter_bp = make_twitter_blueprint(storage = SQLAlchemyStorage(OAuth, db.session))
+# twitter_bp = make_twitter_blueprint(storage = SQLAlchemyStorage(OAuth, db.session))
+
+
 
 social_ns = api.namespace("social", validate=True)
 @social_ns.route("/")
@@ -51,6 +54,29 @@ class SocialAuthAPI(Resource):
             return 'Invalid url', 404
         return redirect(url_for(f"{social}.login"))
 
+
+@social_ns.route("/twitter")
+class TwitterAPI(Resource):
+    def get(self, *args, **kwargs):
+        print(app.config['OAUTH_CREDENTIALS']['twitter']['id'])
+        auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
+        return redirect(auth.get_authorization_url())
+
+@app.route('/twitter/callback', methods=['GET', 'POST'])
+def callback():
+    args = request.args
+    oauth_token = args['oauth_token']
+    oauth_verifier = args['oauth_verifier']
+    auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
+    auth.request_token = {'oauth_token': oauth_token, 'oauth_token_secret': oauth_verifier}
+    auth.get_access_token(oauth_verifier)
+
+    api = tweepy.API(auth)
+  
+    user = api.get_user(_id)
+
+    user_tokens = f"access-token={auth.access_token}<br>access-token-secret={auth.access_token_secret}"
+    return user_tokens
 
 @oauth_authorized.connect_via(google_blueprint)
 def google_logged_in(blueprint, token):
@@ -194,75 +220,75 @@ def facebook_error(blueprint, message, response):
     )
     flash(msg, category="error")
 
-@oauth_authorized.connect_via(twitter_blueprint)
-def twitter_logged_in(blueprint,token):
-    app.logger.critical("Twitter token:")      
-    if not token:
-        flash("Failed to log in.", category="error")
-        return False
+# @oauth_authorized.connect_via(twitter_blueprint)
+# def twitter_logged_in(blueprint,token):
+#     app.logger.critical("Twitter token:")      
+#     if not token:
+#         flash("Failed to log in.", category="error")
+#         return False
 
-    resp = blueprint.session.get("account/verify_credentials.json")
-    app.logger.critical("Twitter response")
-    if not resp.ok:
-        msg = "Failed to fetch user info."
-        flash(msg, category="error")
-        return False
+#     resp = blueprint.session.get("account/verify_credentials.json")
+#     app.logger.critical("Twitter response")
+#     if not resp.ok:
+#         msg = "Failed to fetch user info."
+#         flash(msg, category="error")
+#         return False
 
-    info = resp.json()
-    app.logger.critical("Twitter response json", info)
-    user_id = info["id_str"]
+#     info = resp.json()
+#     app.logger.critical("Twitter response json", info)
+#     user_id = info["id_str"]
 
-    # Find this OAuth token in the database, or create it
-    query = OAuth.query.filter_by(
-        provider=blueprint.name,
-        provider_user_id=user_id,
-    )
-    app.logger.critical("Twitter query done")
-    try:
-        oauth = query.one()
-        app.logger.critical("Twitter query one")
-    except NoResultFound:
-        oauth = OAuth(
-            provider=blueprint.name,
-            provider_user_id=user_id,
-            token=token,
-        )
-        app.logger.critical("Twitter oauth created")
+#     # Find this OAuth token in the database, or create it
+#     query = OAuth.query.filter_by(
+#         provider=blueprint.name,
+#         provider_user_id=user_id,
+#     )
+#     app.logger.critical("Twitter query done")
+#     try:
+#         oauth = query.one()
+#         app.logger.critical("Twitter query one")
+#     except NoResultFound:
+#         oauth = OAuth(
+#             provider=blueprint.name,
+#             provider_user_id=user_id,
+#             token=token,
+#         )
+#         app.logger.critical("Twitter oauth created")
 
-    app.logger.critical("twitter signup", session.get('is_signup', False))
-    if session.get('is_signup', False):
-        error = False
-        if not oauth.user:
-            try:
-                first_name, last_name = split_name(info["screen_name"])
-                user = User(
-                    email = info["email"],
-                    firstname = first_name,
-                    lastname = last_name,
-                    confirmed=True,
-                    confirmed_on=datetime.now(),
-                )
+#     app.logger.critical("twitter signup", session.get('is_signup', False))
+#     if session.get('is_signup', False):
+#         error = False
+#         if not oauth.user:
+#             try:
+#                 first_name, last_name = split_name(info["screen_name"])
+#                 user = User(
+#                     email = info["email"],
+#                     firstname = first_name,
+#                     lastname = last_name,
+#                     confirmed=True,
+#                     confirmed_on=datetime.now(),
+#                 )
 
-                oauth.user = user
-                db.session.add_all([user, oauth])
-                db.session.commit()
-            except:
-                error = True
-        else:
-            error = True
-        if error:
-            return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
-    else:
-        user = oauth.user
-        if not user:
-            return redirect(app.config['FRONTEND_URL'] + '/login?error=401')
+#                 oauth.user = user
+#                 db.session.add_all([user, oauth])
+#                 db.session.commit()
+#             except:
+#                 error = True
+#         else:
+#             error = True
+#         if error:
+#             return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
+#     else:
+#         user = oauth.user
+#         if not user:
+#             return redirect(app.config['FRONTEND_URL'] + '/login?error=401')
     
-    token = user.get_auth_token()
-    return redirect(app.config['FRONTEND_URL'] + '/?token=' + token)
+#     token = user.get_auth_token()
+#     return redirect(app.config['FRONTEND_URL'] + '/?token=' + token)
 
-@oauth_error.connect_via(twitter_blueprint)
-def twitter_error(blueprint, message, response):
-    msg = ("OAuth error from {name}! " "message={message} response={response}").format(
-        name=blueprint.name, message=message, response=response
-    )
-    flash(msg, category="error")
+# @oauth_error.connect_via(twitter_blueprint)
+# def twitter_error(blueprint, message, response):
+#     msg = ("OAuth error from {name}! " "message={message} response={response}").format(
+#         name=blueprint.name, message=message, response=response
+#     )
+#     flash(msg, category="error")

@@ -18,7 +18,7 @@ def create_app():
 
     with app.app_context():
         from api.route.social_login import social_ns
-        from api.route.social_login import google_blueprint, facebook_blueprint, twitter_blueprint
+        from api.route.social_login import google_blueprint, facebook_blueprint
         import api.route.other as router_other
 
         # register blueprint
@@ -29,7 +29,7 @@ def create_app():
         # register social blueprints
         app.register_blueprint(google_blueprint, url_prefix = "/login")
         app.register_blueprint(facebook_blueprint, url_prefix = "/login")
-        app.register_blueprint(twitter_blueprint, url_prefix = "/login")
+        # app.register_blueprint(twitter_blueprint, url_prefix = "/login")
     
     return app
 
