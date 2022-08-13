@@ -84,16 +84,55 @@ def twitter_callback(*args, **kwargs):
 
     api = tweepy.API(auth)
     app.logger.critical('aftr api')
-    res = api.verify_credentials()
+    res = api.verify_credentials(include_email=True)
 
     app.logger.critical(res)
+    query = OAuth.query.filter_by(
+        provider = "twitter", provider_user_id = res["id"]
+    )   
+    try:
+        oauth = query.one()
+    except NoResultFound:
+        twitter_user_login = res["screen_name"]
 
-    return res
+        oauth = OAuth(
+            provider="twitter",
+            provider_user_id=res["id"],
+            provider_user_login=twitter_user_login,
+            token=token,
+        )
 
-    # user = api.get_user(_id)
+    app.logger.critical("Facebook is_signup:", session.get('is_signup', False))
+    if session.get('is_signup', False):
+        error = False
+        if not oauth.user:
+            try:
+                first_name, last_name = split_name(res['name'])
+                user = User(
+                    email = res["email"],
+                    firstname = first_name,
+                    lastname = last_name,
+                    confirmed=True,
+                    confirmed_on=datetime.now(),
+                    # avatar = google_info["picture"],
+                )
 
-    # user_tokens = f"access-token={auth.access_token}<br>access-token-secret={auth.access_token_secret}"
-    # return user_tokens
+                oauth.user = user
+                db.session.add_all([user, oauth])
+                db.session.commit()
+            except:
+                error = True
+        else:
+            error = True
+        if error:
+            return redirect(app.config['FRONTEND_URL'] + '/register?error=409')
+    else:
+        user = oauth.user
+        if not user:
+            return redirect(app.config['FRONTEND_URL'] + '/login?error=401')
+    
+    token = user.get_auth_token()
+    return redirect(app.config['FRONTEND_URL'] + '/?token=' + token)
     
 
 @oauth_authorized.connect_via(google_blueprint)
