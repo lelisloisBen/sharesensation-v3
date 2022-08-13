@@ -1,7 +1,9 @@
 from datetime import datetime
+from logging.config import valid_ident
 from posixpath import split
 from re import L
 from unicodedata import name
+from wsgiref import validate
 from flask import Flask, render_template, redirect, url_for, flash, Blueprint, session
 from flask_dance.contrib.github import make_github_blueprint, github
 from flask_dance.contrib.google import make_google_blueprint, google
@@ -53,22 +55,25 @@ class SocialAuthAPI(Resource):
         session['is_signup'] = signup is not None
         social = login or signup
         if social == 'twitter':
-            return redirect(url_for('api.social_twitter_api'))
+            return redirect(url_for('api.login_twitter_api'))
         elif social not in ["google", "facebook"]:
             return 'Invalid url', 404
         else:
             return redirect(url_for(f"{social}.login"))
 
 
-@social_ns.route("/twitter")
+twitter_ns = api.namespace('login', validate=True)
+
+
+@twitter_ns.route("/twitter")
 class TwitterAPI(Resource):
     def get(self, *args, **kwargs):
         auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'], 
-            callback=url_for('api.social_twitter_callback_api'))
+            callback=url_for('api.login_twitter_callback_api'))
         return redirect(auth.get_authorization_url())
 
 
-@social_ns.route("/twitter/callback")
+@twitter_ns.route("/twitter/authorized")
 class TwitterCallbackAPI(Resource):
     def perform(self, *args, **kwargs):
         args = request.args
