@@ -18,6 +18,7 @@ from api import api
 from flask import request
 from api.utils.other import split_name
 import tweepy
+from flask import url_for
 
 google_blueprint = make_google_blueprint(client_id=app.config['OAUTH_CREDENTIALS']['google']['id'], client_secret=app.config['OAUTH_CREDENTIALS']['google']['secret'],  scope=[
         "openid",
@@ -50,16 +51,19 @@ class SocialAuthAPI(Resource):
         signup = request.args.get('signup', None)
         session['is_signup'] = signup is not None
         social = login or signup
-        if social not in ["google", "facebook", "twitter"]:
+        if social == 'twitter':
+            return redirect(url_for('/api/social/twitter'))
+        elif social not in ["google", "facebook"]:
             return 'Invalid url', 404
-        return redirect(url_for(f"{social}.login"))
+        else:
+            return redirect(url_for(f"{social}.login"))
 
 
 @social_ns.route("/twitter")
 class TwitterAPI(Resource):
     def get(self, *args, **kwargs):
-        print(app.config['OAUTH_CREDENTIALS']['twitter']['id'])
-        auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
+        auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'], 
+            callback=url_for('/api/social/twitter/callback'))
         return redirect(auth.get_authorization_url())
 
 @app.route('/twitter/callback', methods=['GET', 'POST'])
@@ -72,11 +76,17 @@ def callback():
     auth.get_access_token(oauth_verifier)
 
     api = tweepy.API(auth)
-  
-    user = api.get_user(_id)
+    res = api.verify_credentials()
 
-    user_tokens = f"access-token={auth.access_token}<br>access-token-secret={auth.access_token_secret}"
-    return user_tokens
+    print(res)
+    app.logger.critical(res)
+
+    return res
+  
+    # user = api.get_user(_id)
+
+    # user_tokens = f"access-token={auth.access_token}<br>access-token-secret={auth.access_token_secret}"
+    # return user_tokens
 
 @oauth_authorized.connect_via(google_blueprint)
 def google_logged_in(blueprint, token):
