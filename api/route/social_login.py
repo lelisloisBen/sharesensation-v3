@@ -75,14 +75,17 @@ def twitter_callback(*args, **kwargs):
     args = request.args
     oauth_token = args['oauth_token']
     oauth_verifier = args['oauth_verifier']
+    app.logger.critical(oauth_token, oauth_verifier)
     auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
     auth.request_token = {'oauth_token': oauth_token, 'oauth_token_secret': oauth_verifier}
+    app.logger.critical('before access token')
     auth.get_access_token(oauth_verifier)
+    app.logger.critical('after token')
 
     api = tweepy.API(auth)
+    app.logger.critical('aftr api')
     res = api.verify_credentials()
 
-    print(res)
     app.logger.critical(res)
 
     return res
