@@ -88,7 +88,7 @@ def twitter_callback(*args, **kwargs):
 
     app.logger.critical(res)
     query = OAuth.query.filter_by(
-        provider = "twitter", provider_user_id = res.id
+        provider = "twitter", provider_user_id = str(res.id)
     )   
     try:
         oauth = query.one()
@@ -97,7 +97,7 @@ def twitter_callback(*args, **kwargs):
 
         oauth = OAuth(
             provider="twitter",
-            provider_user_id=res.id,
+            provider_user_id=str(res.id),
             provider_user_login=twitter_user_login,
             token=token,
         )
