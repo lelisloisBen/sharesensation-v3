@@ -99,7 +99,7 @@ def twitter_callback(*args, **kwargs):
             provider="twitter",
             provider_user_id=str(res.id),
             provider_user_login=twitter_user_login,
-            token=token,
+            # token=token,
         )
 
     app.logger.critical("Facebook is_signup:", session.get('is_signup', False))
@@ -162,7 +162,7 @@ def google_logged_in(blueprint, token):
             provider=blueprint.name,
             provider_user_id=google_info["id"],
             provider_user_login=google_user_login,
-            token=token,
+            # token=token,
         )
 
     if session.get('is_signup', False):
