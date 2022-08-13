@@ -84,20 +84,20 @@ def twitter_callback(*args, **kwargs):
 
     api = tweepy.API(auth)
     app.logger.critical('aftr api')
-    res = api.verify_credentials(include_email=True)
+    res = api.verify_credentials(include_email='true')
 
     app.logger.critical(res)
     query = OAuth.query.filter_by(
-        provider = "twitter", provider_user_id = res["id"]
+        provider = "twitter", provider_user_id = res.id
     )   
     try:
         oauth = query.one()
     except NoResultFound:
-        twitter_user_login = res["screen_name"]
+        twitter_user_login = res.screen_name
 
         oauth = OAuth(
             provider="twitter",
-            provider_user_id=res["id"],
+            provider_user_id=res.id,
             provider_user_login=twitter_user_login,
             token=token,
         )
@@ -107,9 +107,9 @@ def twitter_callback(*args, **kwargs):
         error = False
         if not oauth.user:
             try:
-                first_name, last_name = split_name(res['name'])
+                first_name, last_name = split_name(res.screen_name)
                 user = User(
-                    email = res["email"],
+                    email = res.email,
                     firstname = first_name,
                     lastname = last_name,
                     confirmed=True,
