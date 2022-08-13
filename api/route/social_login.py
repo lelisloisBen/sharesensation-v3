@@ -64,8 +64,9 @@ class SocialAuthAPI(Resource):
 
 @app.route("/api/login/twitter", methods=['GET'])
 def twitter(*args, **kwargs):
+    print(app.config['BACKEND_URL'] + url_for('twitter_callback'))
     auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'], 
-        callback=url_for('twitter_callback'))
+        callback=app.config['BACKEND_URL'] + url_for('twitter_callback'))
     return redirect(auth.get_authorization_url())
 
 

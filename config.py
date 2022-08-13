@@ -39,6 +39,7 @@ class ProductionConfig(Config):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     FRONTEND_URL = 'https://sharesensation.herokuapp.com'
+    BACKEND_URL = 'https://sharesensation-backend.herokuapp.com'
 
 class DevelopmentConfig(Config):
     ENV="development"
