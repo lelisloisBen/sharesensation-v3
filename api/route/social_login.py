@@ -55,52 +55,42 @@ class SocialAuthAPI(Resource):
         session['is_signup'] = signup is not None
         social = login or signup
         if social == 'twitter':
-            return redirect(url_for('api.login_twitter_api'))
+            return redirect(url_for('twitter'))
         elif social not in ["google", "facebook"]:
             return 'Invalid url', 404
         else:
             return redirect(url_for(f"{social}.login"))
 
 
-twitter_ns = api.namespace('login', validate=True)
+@app.route("/api/login/twitter", methods=['GET'])
+def twitter(*args, **kwargs):
+    auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'], 
+        callback=url_for('twitter_callback'))
+    return redirect(auth.get_authorization_url())
 
 
-@twitter_ns.route("/twitter")
-class TwitterAPI(Resource):
-    def get(self, *args, **kwargs):
-        auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'], 
-            callback=url_for('api.login_twitter_callback_api'))
-        return redirect(auth.get_authorization_url())
+@app.route("/login/twitter/authorized", methods=['GET', 'POST'])
+def twitter_callback(*args, **kwargs):
+    args = request.args
+    oauth_token = args['oauth_token']
+    oauth_verifier = args['oauth_verifier']
+    auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
+    auth.request_token = {'oauth_token': oauth_token, 'oauth_token_secret': oauth_verifier}
+    auth.get_access_token(oauth_verifier)
 
+    api = tweepy.API(auth)
+    res = api.verify_credentials()
 
-@twitter_ns.route("/twitter/authorized")
-class TwitterCallbackAPI(Resource):
-    def perform(self, *args, **kwargs):
-        args = request.args
-        oauth_token = args['oauth_token']
-        oauth_verifier = args['oauth_verifier']
-        auth = tweepy.OAuthHandler(app.config['OAUTH_CREDENTIALS']['twitter']['id'], app.config['OAUTH_CREDENTIALS']['twitter']['secret'])
-        auth.request_token = {'oauth_token': oauth_token, 'oauth_token_secret': oauth_verifier}
-        auth.get_access_token(oauth_verifier)
+    print(res)
+    app.logger.critical(res)
 
-        api = tweepy.API(auth)
-        res = api.verify_credentials()
+    return res
 
-        print(res)
-        app.logger.critical(res)
+    # user = api.get_user(_id)
 
-        return res
+    # user_tokens = f"access-token={auth.access_token}<br>access-token-secret={auth.access_token_secret}"
+    # return user_tokens
     
-        # user = api.get_user(_id)
-
-        # user_tokens = f"access-token={auth.access_token}<br>access-token-secret={auth.access_token_secret}"
-        # return user_tokens
-
-    def get(self, *args, **kwargs):
-        return self.perform(*args, **kwargs)
-    
-    def post(self, *args, **kwargs):
-        return self.perform(*args, **kwargs)
 
 @oauth_authorized.connect_via(google_blueprint)
 def google_logged_in(blueprint, token):

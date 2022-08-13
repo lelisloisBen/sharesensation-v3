@@ -17,7 +17,7 @@ def create_app():
     mail.init_app(app)
 
     with app.app_context():
-        from api.route.social_login import social_ns, twitter_ns
+        from api.route.social_login import social_ns
         from api.route.social_login import google_blueprint, facebook_blueprint
         import api.route.other as router_other
 
