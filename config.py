@@ -48,4 +48,5 @@ class DevelopmentConfig(Config):
     MAIL_SERVER = '127.0.0.1'
     MAIL_PORT = 1025
     FRONTEND_URL = 'http://localhost:3000'
+    BACKEND_URL = 'http://localhost:8000'
     
