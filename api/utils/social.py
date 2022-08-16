@@ -61,7 +61,7 @@ def save_social_and_redirect(
     is_signup, social_name, token, social_id, name, email=None
 ):
     data, error = save_social_info(
-        is_signup, social_name, token, social_id, name, email=None
+        is_signup, social_name, token, social_id, name, email
     )
     if error == 401:
         return redirect(app.config["FRONTEND_URL"] + "/login?error=401")
