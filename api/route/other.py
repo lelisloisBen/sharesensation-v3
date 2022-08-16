@@ -1,18 +1,4 @@
-import jwt
-import datetime
-from urllib import response
-import flask
-import flask_restx
-from api import api
-from api.schema.User import UserSchema
-from api.utils.mail import send_verify_email, valid_email_format
-from database import db
 from flask import request, Response, current_app as app, jsonify
-from flask_login import login_user, logout_user
-from flask_restx import Resource
-from database.model.User import User
-from werkzeug.security import check_password_hash, generate_password_hash
-from functools import wraps
 from database.model.Activity import Activity
 from database.model.SaleTax import SaleTax
 

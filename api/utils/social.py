@@ -1,4 +1,5 @@
 from datetime import datetime
+import requests
 
 from api.utils.other import split_name
 from database import db
@@ -71,3 +72,14 @@ def save_social_and_redirect(
     else:
         token = data.get_auth_token()
         return redirect(app.config["FRONTEND_URL"] + "/?token=" + data)
+
+
+def get_google_info_from_token(token):
+    if not token:
+        return None
+    res = requests.get(
+        f"https://www.googleapis.com/oauth2/v2/userinfo?access_token={token}"
+    )
+    if not res.ok:
+        return None
+    return res.json()
