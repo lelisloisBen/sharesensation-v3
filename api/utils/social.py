@@ -71,7 +71,7 @@ def save_social_and_redirect(
         app.logger.critical(f"Error: {error}\nMessage: {data}")
         return redirect(app.config["FRONTEND_URL"] + "/register?error=401")
     else:
-        token = data.get_auth_token()
+        token = data
         return redirect(app.config["FRONTEND_URL"] + "/?token=" + data)
 
 
