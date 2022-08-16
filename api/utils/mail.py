@@ -25,7 +25,6 @@ def send_verify_email(user):
     send_by_mailgun([user.email], subject, html)
 
 def send_by_mailgun(recipient, subject, text):
-    # print(app.config['MAILGUN_DOMAIN'])
     res = requests.post(
         f"https://api.mailgun.net/v3/{app.config['MAILGUN_DOMAIN']}/messages",
         auth=("api", app.config["MAILGUN_API_KEY"]),
@@ -34,4 +33,4 @@ def send_by_mailgun(recipient, subject, text):
               "to": recipient,
               "subject": subject,
               "html": text})
-    # print(res, res.json())
+              

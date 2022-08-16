@@ -1,3 +1,4 @@
+import tweepy
 from datetime import datetime
 import requests
 
@@ -82,4 +83,27 @@ def get_google_info_from_token(token):
     )
     if not res.ok:
         return None
+    return res.json()
+
+def get_facebook_info_from_token(token):
+    if not token:
+        return None
+    res = requests.get(
+        f"https://graph.facebook.com/me?fields=id,name,email&access_token={token}"
+    )
+    if not res.ok:
+        return None
+    return res.json()
+    
+def get_twitter_info_from_token(token, token_secret):
+    if not token or not token_secret:
+        return None
+    auth = tweepy.OAuthHandler(
+        app.config["OAUTH_CREDENTIALS"]["twitter"]["id"],
+        app.config["OAUTH_CREDENTIALS"]["twitter"]["secret"],
+    )
+    auth.access_token = token
+    auth.access_token_secret = token_secret
+    api = tweepy.API(auth)
+    res = api.verify_credentials(include_email="true")
     return res.json()
