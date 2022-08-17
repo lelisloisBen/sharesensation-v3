@@ -1,7 +1,9 @@
-import tweepy
 from datetime import datetime
-import requests
 
+import flask
+import requests
+import tweepy
+from api.schema.User import UserSchema
 from api.utils.other import split_name
 from database import db
 from database.model.OAuth import OAuth
@@ -54,48 +56,63 @@ def save_social_info(is_signup, social_name, token, social_id, name, email=None)
         if not user:
             return "", 401
 
-    return user.get_auth_token(), ""
+    return user, 200
 
 
-def save_social_and_redirect(
-    is_signup, social_name, token, social_id, name, email=None
-):
-    data, error = save_social_info(
-        is_signup, social_name, token, social_id, name, email
-    )
-    if error == 401:
+def social_auth_redirect(data, code):
+    if code == 401:
         return redirect(app.config["FRONTEND_URL"] + "/login?error=401")
-    elif error == 409:
+    elif code == 409:
         return redirect(app.config["FRONTEND_URL"] + "/register?error=409")
-    elif error:
-        app.logger.critical(f"Error: {error}\nMessage: {data}")
+    elif code != 200:
+        app.logger.critical(f"Error: {code}\nMessage: {data}")
         return redirect(app.config["FRONTEND_URL"] + "/register?error=401")
     else:
-        token = data
-        return redirect(app.config["FRONTEND_URL"] + "/?token=" + data)
+        user = data
+        return redirect(app.config["FRONTEND_URL"] + "/?token=" + user.get_auth_token())
 
 
-def get_google_info_from_token(token):
+def save_google_info_from_token(is_signup, token):
     if not token:
-        return None
+        return "Invalid token", 400
     res = requests.get(
         f"https://www.googleapis.com/oauth2/v2/userinfo?access_token={token}"
     )
     if not res.ok:
-        return None
-    return res.json()
+        return "Invalid token", 400
 
-def get_facebook_info_from_token(token):
+    data = res.json()
+    return save_social_info(
+        is_signup,
+        "google",
+        {"access_token", token},
+        data["id"],
+        data["name"],
+        data["email"],
+    )
+
+
+def save_facebook_info_from_token(is_signup, token):
     if not token:
-        return None
+        return "Invalid token", 400
     res = requests.get(
         f"https://graph.facebook.com/me?fields=id,name,email&access_token={token}"
     )
     if not res.ok:
-        return None
-    return res.json()
-    
-def get_twitter_info_from_token(token, token_secret):
+        return "Invalid token", 400
+
+    data = res.json()
+    return save_social_info(
+        is_signup,
+        "facebook",
+        {"access_token", token},
+        data["id"],
+        data["name"],
+        data["email"],
+    )
+
+
+def save_twitter_info_from_token(is_signup, token, token_secret):
     if not token or not token_secret:
         return None
     auth = tweepy.OAuthHandler(
@@ -105,5 +122,33 @@ def get_twitter_info_from_token(token, token_secret):
     auth.access_token = token
     auth.access_token_secret = token_secret
     api = tweepy.API(auth)
-    res = api.verify_credentials(include_email="true")
-    return res.json()
+    user = api.verify_credentials(include_email="true")
+
+    return save_social_info(
+        is_signup,
+        "twitter",
+        {
+            "access_token": token,
+            "access_token_secret": token_secret,
+        },
+        user.id,
+        user.name,
+        None,
+    )
+
+
+def save_social_info_from_token(is_signup, social_name, token, token_secret):
+    if social_name == "google":
+        user, code = save_google_info_from_token(is_signup, token)
+    elif social_name == "facebook":
+        user, code = save_facebook_info_from_token(is_signup, token)
+    elif social_name == "twitter":
+        user, code = save_twitter_info_from_token(is_signup, token, token_secret)
+    else:
+        return "Invalid social name", 400
+    if code == 200:
+        resp = UserSchema().dump(user)
+        resp["token"] = user.get_auth_token()
+        return flask.jsonify(resp)
+    else:
+        return user, code

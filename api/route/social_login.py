@@ -2,11 +2,11 @@ import flask_restx
 import tweepy
 from api import api
 from api.utils.social import (
-    get_facebook_info_from_token,
-    get_google_info_from_token,
-    save_social_and_redirect,
-    save_social_info,
-    get_twitter_info_from_token,
+    save_google_info_from_token,
+    save_facebook_info_from_token,
+    save_social_info_from_token,
+    save_twitter_info_from_token,
+    social_auth_redirect,
 )
 from database import db
 from database.model.OAuth import OAuth
@@ -58,27 +58,40 @@ class SocialAuthAPI(Resource):
             return redirect(url_for(f"{social}.login"))
 
 
-signup_model = social_ns.model(
-    "Social Signup",
+social_auth_model = social_ns.model(
+    "Social Auth",
     {
+        "social_name": flask_restx.fields.String(required=True),
         "access_token": flask_restx.fields.String(required=True),
-        "social": flask_restx.fields.String(required=True),
+        "access_token_secret": flask_restx.fields.String(required=False),
     },
 )
 
 
 @social_ns.route("/signup")
 class SocialSignupAPI(Resource):
-    @social_ns.doc(body=signup_model)
+    @social_ns.doc(body=social_auth_model)
     def post(self, *args, **kwargs):
-        import requests
-
         data = request.json
-        token = data["access_token"]
-        res = requests.get(
-            f"https://www.googleapis.com/oauth2/v2/userinfo?access_token={token}"
+        return save_social_info_from_token(
+            True,
+            data.get("social_name", None),
+            data.get("access_token", None),
+            data.get("access_token_secret"),
         )
-        return "", 200
+
+
+@social_ns.route("/login")
+class SocialLoginAPI(Resource):
+    @social_ns.doc(body=social_auth_model)
+    def post(self, *args, **kwargs):
+        data = request.json
+        return save_social_info_from_token(
+            False,
+            data.get("social_name", None),
+            data.get("access_token", None),
+            data.get("access_token_secret"),
+        )
 
 
 @app.route("/api/login/twitter", methods=["GET"])
@@ -106,24 +119,16 @@ def twitter_callback(*args, **kwargs):
     }
     token, secret = auth.get_access_token(oauth_verifier)
 
-    info = get_twitter_info_from_token(token, secret)
     is_signup = session.get("is_signup", False)
-    return save_social_and_redirect(
-        is_signup, "twitter", token, info.id, info.screen_name, None
-    )
+    user, code = save_twitter_info_from_token(is_signup, token, secret)
+    return social_auth_redirect(user, code)
 
 
 @oauth_authorized.connect_via(google_blueprint)
 def google_logged_in(blueprint, token):
-    info = get_google_info_from_token(token["access_token"])
-    if not info:
-        app.logger(f"Invalid google token: {token}")
-        return
-
     is_signup = session.get("is_signup", False)
-    return save_social_and_redirect(
-        is_signup, "google", token, info["id"], info["name"], info["email"]
-    )
+    user, code = save_google_info_from_token(is_signup, token["access_token"])
+    return social_auth_redirect(user, code)
 
 
 @oauth_error.connect_via(google_blueprint)
@@ -136,15 +141,9 @@ def google_error(blueprint, message, response):
 
 @oauth_authorized.connect_via(facebook_blueprint)
 def facebook_logged_in(blueprint, token):
-    info = get_facebook_info_from_token(token["access_token"])
-    if not info:
-        app.logger(f"Invalid facebook token: {token}")
-        return
-
     is_signup = session.get("is_signup", False)
-    return save_social_and_redirect(
-        is_signup, "facebook", token, info["id"], info["name"], info["email"]
-    )
+    user, code = save_facebook_info_from_token(is_signup, token["access_token"])
+    return social_auth_redirect(user, code)
 
 
 @oauth_error.connect_via(facebook_blueprint)
