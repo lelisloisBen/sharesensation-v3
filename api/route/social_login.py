@@ -75,6 +75,12 @@ class SocialSignupAPI(Resource):
         """
         Register user with social access token.
         If success, return user info and token to access this site.
+
+        **Args**
+
+        social_name can be google, facebook or twitter.
+        For google and facebook, access_token must be provided
+        For twitter, access_token and access_token_secret must be provided.
         """
         data = request.json
         return save_social_info_from_token(
@@ -92,6 +98,12 @@ class SocialLoginAPI(Resource):
         """
         Login user with social access token.
         If success, return user info and token to access this site.
+
+        **Args**
+
+        social_name can be google, facebook or twitter.
+        For google and facebook, access_token must be provided
+        For twitter, access_token and access_token_secret must be provided.
         """
         data = request.json
         return save_social_info_from_token(
