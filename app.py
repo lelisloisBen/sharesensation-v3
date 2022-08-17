@@ -18,6 +18,7 @@ def create_app():
 
     with app.app_context():
         from api.route.social_login import social_ns
+        from api.route.backup import backup_ns
         from api.route.social_login import google_blueprint, facebook_blueprint
         import api.route.other as router_other
 

@@ -24,6 +24,7 @@ from .model.Activity import Activity
 from .model.OAuth import OAuth
 from .model.SaleTax import SaleTax
 from .model.User import User
+from .model.Category import Category
 
 def init_app(app):
     db.init_app(app)
