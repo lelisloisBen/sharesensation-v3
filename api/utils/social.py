@@ -19,6 +19,7 @@ def save_social_info(is_signup, social_name, token, social_id, name, email=None)
         oauth = query.one()
     except NoResultFound:
         user_login = name
+        print(token, type(token))
 
         oauth = OAuth(
             provider=social_name,
@@ -85,7 +86,7 @@ def save_google_info_from_token(is_signup, token):
     return save_social_info(
         is_signup,
         "google",
-        {"access_token", token},
+        {"access_token": token},
         data["id"],
         data["name"],
         data["email"],
@@ -105,7 +106,7 @@ def save_facebook_info_from_token(is_signup, token):
     return save_social_info(
         is_signup,
         "facebook",
-        {"access_token", token},
+        {"access_token": token},
         data["id"],
         data["name"],
         data["email"],

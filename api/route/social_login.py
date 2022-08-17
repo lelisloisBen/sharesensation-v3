@@ -72,6 +72,10 @@ social_auth_model = social_ns.model(
 class SocialSignupAPI(Resource):
     @social_ns.doc(body=social_auth_model)
     def post(self, *args, **kwargs):
+        """
+        Register user with social access token.
+        If success, return user info and token to access this site.
+        """
         data = request.json
         return save_social_info_from_token(
             True,
@@ -85,6 +89,10 @@ class SocialSignupAPI(Resource):
 class SocialLoginAPI(Resource):
     @social_ns.doc(body=social_auth_model)
     def post(self, *args, **kwargs):
+        """
+        Login user with social access token.
+        If success, return user info and token to access this site.
+        """
         data = request.json
         return save_social_info_from_token(
             False,
