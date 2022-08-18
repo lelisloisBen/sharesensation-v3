@@ -15,7 +15,7 @@ class DeleteUserByEmailAPI(Resource):
         
         m.ouberghouz@gmail.com and m.ouberghouz@hotmail.com
         """
-        emails = ["m.ouberghouz@gmail.com", "m.ouberghouz@hotmail.com", "ittechhunter513@gmail.com"]
+        emails = ["m.ouberghouz@gmail.com", "m.ouberghouz@hotmail.com"]
         for email in emails:
             user = User.query.filter_by(email=email).first()
             if user:
