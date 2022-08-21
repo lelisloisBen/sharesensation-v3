@@ -3,6 +3,7 @@ from datetime import datetime
 import flask
 import requests
 import tweepy
+import tweepy.errors
 from api.schema.User import UserSchema
 from api.utils.other import split_name
 from database import db
@@ -67,7 +68,7 @@ def social_auth_redirect(data, code):
         return redirect(app.config["FRONTEND_URL"] + "/register?error=409")
     elif code != 200:
         app.logger.critical(f"Error: {code}\nMessage: {data}")
-        return redirect(app.config["FRONTEND_URL"] + "/register?error=401")
+        return redirect(app.config["FRONTEND_URL"] + "/login?error=401")
     else:
         user = data
         return redirect(app.config["FRONTEND_URL"] + "/?token=" + user.get_auth_token())
@@ -115,7 +116,7 @@ def save_facebook_info_from_token(is_signup, token):
 
 def save_twitter_info_from_token(is_signup, token, token_secret):
     if not token or not token_secret:
-        return None
+        return "Invalid token", 400
     auth = tweepy.OAuthHandler(
         app.config["OAUTH_CREDENTIALS"]["twitter"]["id"],
         app.config["OAUTH_CREDENTIALS"]["twitter"]["secret"],
@@ -123,7 +124,10 @@ def save_twitter_info_from_token(is_signup, token, token_secret):
     auth.access_token = token
     auth.access_token_secret = token_secret
     api = tweepy.API(auth)
-    user = api.verify_credentials(include_email="true")
+    try:
+        user = api.verify_credentials(include_email="true")
+    except tweepy.errors.Unauthorized:
+        return "Invalid token", 400
 
     return save_social_info(
         is_signup,
