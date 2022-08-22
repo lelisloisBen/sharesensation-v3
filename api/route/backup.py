@@ -1,6 +1,7 @@
 from api import api
-from database import Activity, Category, db
 from database.model.Activity import Activity
+from database.model.Category import Category
+from database import db
 from flask_restx import Resource
 
 backup_ns = api.namespace("backup", validate=True)

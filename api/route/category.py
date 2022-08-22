@@ -1,5 +1,5 @@
 from api import api
-from database import Category
+from database.model.Category import Category
 from flask_restx import Resource
 from flask import jsonify
 from api.schema.Category import CategorySchema

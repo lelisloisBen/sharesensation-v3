@@ -1,5 +1,5 @@
 from api import api
-from database import Activity
+from database.model.Activity import Activity
 from flask_restx import Resource, reqparse, inputs
 from flask import jsonify
 from api.schema.Activity import ActivitySchema

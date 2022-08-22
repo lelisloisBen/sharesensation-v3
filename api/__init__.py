@@ -1,15 +1,26 @@
 from flask_restx import Api
 from flask_mail import Mail
 
-# authorizations = {"Bearer Auth": {"type": "apiKey", "in": "header",
-#                                     "name": "Authorization"}}
+mail = Mail()
+
+authorizations = {"Bearer Auth": {"type": "apiKey", "in": "header",
+                                    "name": "Authorization"}}
 api = Api(
     title='Sharesensation API',
     doc='/doc',
     version="1.0",
-    description="Welcome to the Swagger UI documentation site!",
-    security='Session Auth',
-    # authorizations=authorizations
-)
+    description="""
+# Authorization
 
-mail = Mail()
+You get token when you try to login.
+Add it to header when you make a request.
+
+```
+{
+    "Authorization": token,
+}
+```
+""",
+    security='Bearer Auth',
+    authorizations=authorizations
+)

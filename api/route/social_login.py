@@ -1,3 +1,4 @@
+from wsgiref import validate
 import flask_restx
 import tweepy
 from api import api
@@ -65,12 +66,13 @@ social_auth_model = social_ns.model(
         "access_token": flask_restx.fields.String(required=True),
         "access_token_secret": flask_restx.fields.String(required=False),
     },
+    strict=True,
 )
 
 
 @social_ns.route("/signup")
 class SocialSignupAPI(Resource):
-    @social_ns.doc(body=social_auth_model)
+    @social_ns.doc(body=social_auth_model, validate=True)
     def post(self, *args, **kwargs):
         """
         Register user with social access token.

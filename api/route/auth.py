@@ -1,3 +1,4 @@
+from wsgiref import validate
 import jwt
 import datetime
 from urllib import response
@@ -24,6 +25,7 @@ signup_model = auth_ns.model(
         "email": flask_restx.fields.String(required=True),
         "password": flask_restx.fields.String(required=True),
     },
+    strict=True,
 )
 
 login_model = auth_ns.model(
@@ -32,9 +34,8 @@ login_model = auth_ns.model(
         "email": flask_restx.fields.String(required=True),
         "password": flask_restx.fields.String(required=True),
     },
+    strict=True,
 )
-
-blacklist_token = set()
 
 def token_required(f):
     """Verify if the token is valid."""
@@ -43,7 +44,7 @@ def token_required(f):
         token = None
         if 'HTTP_AUTHORIZATION' in flask.request.headers.environ:
             token = flask.request.headers.environ['HTTP_AUTHORIZATION']
-        if not token or token in blacklist_token:
+        if not token:
             return flask.make_response('A valid token is missing.', 401)
         try:
             user_info = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
@@ -56,7 +57,7 @@ def token_required(f):
 
 @auth_ns.route("/signup")
 class AuthAPI(Resource):
-    @auth_ns.doc(body=signup_model)
+    @auth_ns.doc(body=signup_model, validate=True)
     def post(self, *args, **kwargs):
         """User Signup"""
         data = request.json
@@ -100,7 +101,7 @@ class AuthAPI(Resource):
 
 @auth_ns.route("/login")
 class LoginUser(Resource):
-    @auth_ns.doc(body=login_model)
+    @auth_ns.doc(body=login_model, validate=True)
     def post(self, *args, **kwargs):
         """Login User"""
         data = request.json
@@ -124,8 +125,9 @@ class LogoutUser(Resource):
     @token_required
     def post(self, *args, **kwargs):
         """Logout the user"""
-        logout_user()
-        return '{}', 200
+        # token = flask.request.headers.environ['HTTP_AUTHORIZATION']
+        # blacklist_token.add(token)
+        return "", 200
 
 
 @auth_ns.route('/confirm-email')

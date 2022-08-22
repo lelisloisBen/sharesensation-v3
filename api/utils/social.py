@@ -77,9 +77,11 @@ def social_auth_redirect(data, code):
 def save_google_info_from_token(is_signup, token):
     if not token:
         return "Invalid token", 400
+    print(token)
     res = requests.get(
         f"https://www.googleapis.com/oauth2/v2/userinfo?access_token={token}"
     )
+    print(res, res.text)
     if not res.ok:
         return "Invalid token", 400
 

@@ -22,6 +22,7 @@ def create_app():
         from api.route.category import category_ns
         from api.route.activity import activity_ns
         from api.route.user import user_ns
+        from api.route.user_acitivity import user_activity_ns
         from api.route.social_login import google_blueprint, facebook_blueprint
         import api.route.other as router_other
 
