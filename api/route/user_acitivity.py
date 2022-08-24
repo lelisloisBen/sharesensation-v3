@@ -73,6 +73,12 @@ create_model = user_activity_ns.model(
         "min_weight": flask_restx.fields.Integer(required=False),
         "max_weight": flask_restx.fields.Integer(required=False),
         "procedure_rules": flask_restx.fields.String(required=False),
+
+        "company_name": flask_restx.fields.String(required=True),
+        "company_state": flask_restx.fields.String(required=True),
+        "company_ein": flask_restx.fields.String(required=True),
+        "company_phone": flask_restx.fields.String(required=True),
+        "company_website": flask_restx.fields.String(required=True),
         
         "times": flask_restx.fields.List(flask_restx.fields.Nested(time_model, required=True)),
         "prices": flask_restx.fields.List(flask_restx.fields.Nested(price_model, required=True)),
