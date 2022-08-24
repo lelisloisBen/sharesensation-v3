@@ -81,7 +81,7 @@ create_model = user_activity_ns.model(
 )
 
 upload_parser = user_activity_ns.parser()
-upload_parser.add_argument("images[]", location="files", type=FileStorage, required=True, action="append")
+upload_parser.add_argument("images", location="files", type=FileStorage, required=True, action="append")
 
 @user_activity_ns.route("/")
 class CreateUserActivityAPI(Resource):
@@ -119,6 +119,9 @@ class UploadImagesAPI(Resource):
     def post(self, user_activity_id):
         """
         Upload images for user activity
+
+        After create activity, you get user_activity_id.
+        You can upload images for the activity by calling this API.
 
         Content-Type: multipart/form-data
         """
