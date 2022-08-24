@@ -124,8 +124,6 @@ class UploadImagesAPI(Resource):
         """
         user_activity = UserActivity.query.filter(UserActivity.id == user_activity_id).first_or_404()
         
-        print(request.files)
-
         files = request.files.getlist("images")
         s3_path = []
         for file in files:
