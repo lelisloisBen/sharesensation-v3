@@ -20,6 +20,15 @@ def import_models():
 
 import_models()
 
+from .model.Activity import Activity
+from .model.Category import Category
+from .model.OAuth import OAuth
+from .model.SaleTax import SaleTax
+from .model.User import User
+from .model.UserActivity import UserActivity
+from .model.UserActivityPrice import UserActivityPrice
+from .model.UserActivityTime import UserActivityTime
+
 def init_app(app):
     db.init_app(app)
     db.create_all(app=app)
