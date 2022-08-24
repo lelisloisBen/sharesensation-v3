@@ -31,6 +31,12 @@ class UserActivity(db.Model):
     max_weight = db.Column(db.Integer, nullable=True)
     procedure_rules = db.Column(db.Text, nullable=True)
 
+    company_name = db.Column(db.String(50), nullable=False)
+    company_state = db.Column(db.String(20), nullable=False)
+    company_ein = db.Column(db.String(15), nullable=False)
+    company_phone = db.Column(db.String(15), nullable=False)
+    company_website = db.Column(db.String(30), nullable=False)
+
     images = db.Column(db.JSON, nullable=True)
 
     def __repr__(self):
