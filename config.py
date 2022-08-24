@@ -30,6 +30,11 @@ class Config(object):
         }
     }
 
+    S3_BUCKET = os.environ.get("S3_BUCKET_NAME")
+    S3_KEY = os.environ.get("AWS_ACCESS_KEY")
+    S3_SECRET = os.environ.get("AWS_ACCESS_SECRET")
+    S3_LOCATION = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
+
 class ProductionConfig(Config):
     DEBUG = True
     MAIL_SERVER = os.environ.get('MAIL_SERVER')

@@ -31,5 +31,7 @@ class UserActivity(db.Model):
     max_weight = db.Column(db.Integer, nullable=True)
     procedure_rules = db.Column(db.Text, nullable=True)
 
+    images = db.Column(db.JSON, nullable=True)
+
     def __repr__(self):
         return '<UserActivity %r>' % self.id
