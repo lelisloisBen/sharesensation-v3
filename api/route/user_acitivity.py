@@ -87,7 +87,7 @@ create_model = user_activity_ns.model(
 )
 
 upload_parser = user_activity_ns.parser()
-upload_parser.add_argument("images", location="files", type=FileStorage, required=True, action="append")
+upload_parser.add_argument("images[]", location="files", type=FileStorage, required=True, action="append")
 
 @user_activity_ns.route("/")
 class CreateUserActivityAPI(Resource):
@@ -133,7 +133,7 @@ class UploadImagesAPI(Resource):
         """
         user_activity = UserActivity.query.filter(UserActivity.id == user_activity_id).first_or_404()
         
-        files = request.files.getlist("images")
+        files = request.files.getlist("images[]")
         s3_path = []
         for file in files:
             file.filename = secure_filename(file.filename)
