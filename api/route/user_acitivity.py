@@ -1,23 +1,21 @@
-from distutils.command.upload import upload
-from hashlib import sha224
-from tokenize import String
-from werkzeug.datastructures import FileStorage
-from typing_extensions import Required
-from wsgiref import validate
-from api import api
-from database.model.Category import Category
-from flask_restx import Resource
-from flask import jsonify, request
+import uuid
+from io import BytesIO
+
 import flask_restx
+from api import api
+from api.utils.amazon import resize_image_size, upload_file_to_s3
+from database import db
 from database.model.UserActivity import UserActivity
 from database.model.UserActivityPrice import UserActivityPrice
 from database.model.UserActivityTime import UserActivityTime
-from database import db
-from werkzeug.utils import secure_filename
-from .auth import token_required
 from flask import current_app as app
-from api.utils.amazon import upload_file_to_s3
-from database.model.UserActivity import UserActivity
+from flask import jsonify, request
+from flask_restx import Resource
+from PIL import Image
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
+
+from .auth import token_required
 
 user_activity_ns = api.namespace("user_activity", validate=True)
 
@@ -136,8 +134,16 @@ class UploadImagesAPI(Resource):
         files = request.files.getlist("images[]")
         s3_path = []
         for file in files:
-            file.filename = secure_filename(file.filename)
-            path = upload_file_to_s3(file, app.config["S3_BUCKET"])
+            file_name = str(uuid.uuid4()) + '-' + secure_filename(file.filename)
+            
+            in_mem_file = BytesIO(file.read())
+            image = Image.open(in_mem_file)
+            image.thumbnail(resize_image_size(image.width, image.height))
+            in_mem_file = BytesIO()
+            image.save(in_mem_file, format="PNG")
+            in_mem_file.seek(0)
+
+            path = upload_file_to_s3(file, app.config["S3_BUCKET"], file_name)
             s3_path.append(path)
         
         user_activity.images = s3_path
