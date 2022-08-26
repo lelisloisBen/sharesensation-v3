@@ -45,12 +45,12 @@ def token_required(f):
         if 'HTTP_AUTHORIZATION' in flask.request.headers.environ:
             token = flask.request.headers.environ['HTTP_AUTHORIZATION']
         if not token:
-            return flask.make_response('A valid token is missing.', 401)
+            return 'A valid token is missing.', 401
         try:
             user_info = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
             user = User.query.filter_by(email=user_info['email']).first()
         except:
-            return flask.make_response('The token is invalid.', 401)
+            return 'The token is invalid.', 401
         return f(*args, **kwargs, user=user)
     return decorator
 
