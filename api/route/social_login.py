@@ -17,7 +17,7 @@ from flask_dance.consumer import oauth_authorized, oauth_error
 from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from flask_dance.contrib.facebook import facebook, make_facebook_blueprint
 from flask_dance.contrib.google import google, make_google_blueprint
-from flask_restx import Resource
+from flask_restx import Resource, reqparse
 from sqlalchemy.orm.exc import NoResultFound
 
 google_blueprint = make_google_blueprint(
@@ -42,6 +42,8 @@ facebook_bp = make_facebook_blueprint(storage=SQLAlchemyStorage(OAuth, db.sessio
 
 social_ns = api.namespace("social", validate=True)
 
+social_auth_parser = reqparse.RequestParser()
+social_auth_parser.add_argument("sort", type=str)
 
 @social_ns.route("/")
 class SocialAuthAPI(Resource):
