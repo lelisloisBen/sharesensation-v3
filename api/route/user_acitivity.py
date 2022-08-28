@@ -124,7 +124,14 @@ class UserActivityAPI(Resource):
         db.session.commit()
         return {"id": new_activity.id}, 200
 
-    @api.doc(params={"category": {"in": "query"}, "city": {"in": "query"}})
+    @api.doc(
+        params={
+            "category": {"in": "query"},
+            "city": {"in": "query"},
+            "page": {"in": "query", "description": "Starts from 0"},
+            "page_size": {"in": "query", "description": "Default is 20"},
+        }
+    )
     def get(self, *args, **kwargs):
         """
         Get User Activity List
@@ -134,19 +141,33 @@ class UserActivityAPI(Resource):
         query = UserActivity.query
 
         if category := request.args.get("category", None):
-            query = query.join(Activity, Activity.id == UserActivity.activity_id).filter(Activity.cat == category)
+            query = query.join(
+                Activity, Activity.id == UserActivity.activity_id
+            ).filter(Activity.cat == category)
         if city := request.args.get("city", None):
             query = query.filter(UserActivity.city == city)
-        
-        activities = query.all()
 
-        return UserActivitySchema().dump(activities, many=True), 200
+        total_count = query.count()
+        page = int(request.args.get("page", 0))
+        page_size = int(request.args.get("page_size", 20))
+
+        activities = query.limit(page_size).offset(page * page_size).all()
+        result = UserActivitySchema().dump(activities, many=True)
+
+        return {
+            "page": page,
+            "page_size": page_size,
+            "total_count": total_count,
+            "results": result,
+        }, 200
+
 
 @user_activity_ns.route("/<int:user_activity_id>")
 class UserActivitySingleAPI(Resource):
     def get(self, user_activity_id):
         user_activity = UserActivity.query.filter_by(id=user_activity_id).first_or_404()
         return UserActivitySchema().dump(user_activity), 200
+
 
 @user_activity_ns.route("/<int:user_activity_id>/images")
 class UploadImagesAPI(Resource):

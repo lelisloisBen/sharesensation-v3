@@ -25,7 +25,7 @@ def upload_file_to_s3(file, bucket_name, file_name, acl="public-read"):
         print("Something Happened: ", e)
         app.logger.critical("Uploading file to s3" + str(e))
         return ""
-    return "{}{}".format(app.config["S3_LOCATION"], file.filename)
+    return "{}{}".format(app.config["S3_LOCATION"], file_name)
 
 def resize_image_size(width, height):
     if width < 320:
