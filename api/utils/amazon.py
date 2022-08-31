@@ -7,7 +7,7 @@ s3 = boto3.client(
    aws_secret_access_key=app.config['S3_SECRET']
 )
 
-def upload_file_to_s3(file, bucket_name, file_name, acl="public-read"):
+def upload_file_to_s3(file, bucket_name, file_name, content_type, acl="public-read"):
     """
     Docs: http://boto3.readthedocs.io/en/latest/guide/s3.html
     """
@@ -18,7 +18,7 @@ def upload_file_to_s3(file, bucket_name, file_name, acl="public-read"):
             file_name,
             ExtraArgs={
                 "ACL": acl,
-                "ContentType": file.content_type    #Set appropriate content type as per the file
+                "ContentType": content_type    #Set appropriate content type as per the file
             }
         )
     except Exception as e:

@@ -194,10 +194,10 @@ class UploadImagesAPI(Resource):
             image = Image.open(in_mem_file)
             image.thumbnail(resize_image_size(image.width, image.height))
             in_mem_file = BytesIO()
-            image.save(in_mem_file, format="PNG")
+            image.save(in_mem_file, format=image.format)
             in_mem_file.seek(0)
 
-            path = upload_file_to_s3(file, app.config["S3_BUCKET"], file_name)
+            path = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], file_name, file.content_type)
             s3_path.append(path)
 
         user_activity.images = s3_path
