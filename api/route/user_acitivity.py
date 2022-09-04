@@ -140,15 +140,15 @@ class UserActivityAPI(Resource):
         """
         query = UserActivity.query
 
-        if category := request.args.get("category", None):
+        if activity := request.args.get("activity", None):
             query = query.join(
                 Activity, Activity.id == UserActivity.activity_id
-            ).filter(Activity.cat == category)
+            ).filter(Activity.name == activity)
         if city := request.args.get("city", None):
-            query = query.filter(UserActivity.city == city)
+            query = query.filter(UserActivity.city.contains(city))
 
         total_count = query.count()
-        page = int(request.args.get("page", 0))
+        page = int(request.args.get("page", 1)) - 1
         page_size = int(request.args.get("page_size", 20))
 
         activities = query.limit(page_size).offset(page * page_size).all()
@@ -158,6 +158,7 @@ class UserActivityAPI(Resource):
             "page": page,
             "page_size": page_size,
             "total_count": total_count,
+            "page_count": (total_count + page_size - 1) // page_size,
             "results": result,
         }, 200
 
