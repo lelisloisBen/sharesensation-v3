@@ -24,6 +24,7 @@ class UserActivitySchema(ma.SQLAlchemyAutoSchema):
     prices = fields.Method("get_prices")
     times = fields.Method("get_times")
     activity_name = fields.Method("get_activity_name")
+    category = fields.Method("get_category")
 
     def get_prices(self, obj):
         prices = UserActivityPrice.query.filter_by(user_activity_id=obj.id).all()
