@@ -37,5 +37,9 @@ class UserActivitySchema(ma.SQLAlchemyAutoSchema):
         activity = Activity.query.filter_by(id=obj.activity_id).first()
         return activity.name if activity else None
 
+    def get_category(self, obj):
+        activity = Activity.query.filter_by(id=obj.activity_id).first()
+        return activity.cat if activity else None
+
     class Meta:
         model = UserActivity
