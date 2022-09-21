@@ -46,7 +46,7 @@ class UserActivitySchema(ma.SQLAlchemyAutoSchema):
 
     def get_user_name(self, obj):
         user = User.query.filter_by(id=obj.user_id).first()
-        return (user.first_name + " " + user.last_name) if user else None
+        return (user.firstname + " " + user.lastname) if user else None
 
     class Meta:
         model = UserActivity
