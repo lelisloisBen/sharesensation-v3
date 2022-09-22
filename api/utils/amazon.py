@@ -39,3 +39,7 @@ def resize_image_size(width, height):
     if height > 1350:
         height = 1350
     return (width, height)
+
+def get_square_area(width, height):
+    size = width if width < height else height
+    return ((width - size) / 2, (height - size) / 2, (width + size) / 2, (height + size) / 2)    

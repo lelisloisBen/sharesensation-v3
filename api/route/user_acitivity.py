@@ -5,7 +5,7 @@ from io import BytesIO
 
 import flask_restx
 from api import api
-from api.utils.amazon import resize_image_size, upload_file_to_s3
+from api.utils.amazon import resize_image_size, upload_file_to_s3, get_square_area
 from api.utils.other import removeSpaces
 from database import Activity, UserActivity, UserActivityPrice, UserActivityTime, db
 from flask import current_app as app
@@ -84,6 +84,16 @@ create_model = user_activity_ns.model(
         "prices": flask_restx.fields.List(
             flask_restx.fields.Nested(price_model, required=True)
         ),
+    },
+    strict=True,
+)
+
+book_model = user_activity_ns.model(
+    "Boot activity",
+    {
+        "activity_id": flask_restx.fields.Integer(required=True),
+        "price_id": flask_restx.fields.Float(required=True),
+        "date": flask_restx.fields.Integer(required=True),
     },
     strict=True,
 )
@@ -193,9 +203,11 @@ class UploadImagesAPI(Resource):
 
             in_mem_file = BytesIO(file.read())
             image = Image.open(in_mem_file)
-            image.thumbnail(resize_image_size(image.width, image.height))
+            format = image.format
+            image = image.crop(get_square_area(image.width, image.height))
+            image.thumbnail((1080, 1080))
             in_mem_file = BytesIO()
-            image.save(in_mem_file, format=image.format)
+            image.save(in_mem_file, format=format)
             in_mem_file.seek(0)
 
             path = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], file_name, file.content_type)
@@ -205,3 +217,29 @@ class UploadImagesAPI(Resource):
         db.session.commit()
 
         return ""
+
+# @user_activity_ns.route("/")
+# class UserActivityAPI(Resource):
+#     @user_activity_ns.doc(body=book_model, validate=True)
+#     @token_required
+#     def post(self, user, *args, **kwargs):
+#         """
+#         Book activity.
+
+#         If it's successful, it returns 201 response.
+#         """
+#         data = request.json
+#         user_activity = UserActivityBook.query.filter_by(user_id=user.id, activity_id=data['activity_id'], price_id=data['price_id'], date=data['date']).first()
+#         if user_activity:
+#             return ""
+#         new_activity = UserActivity(**data, user_id=user.id)
+#         db.session.add(new_activity)
+#         db.session.flush()
+#         for time in times:
+#             new_time = UserActivityTime(**time, user_activity_id=new_activity.id)
+#             db.session.add(new_time)
+#         for price in prices:
+#             new_price = UserActivityPrice(**price, user_activity_id=new_activity.id)
+#             db.session.add(new_price)
+#         db.session.commit()
+#         return {"id": new_activity.id}, 200
