@@ -136,7 +136,7 @@ class UserActivityAPI(Resource):
 
     @api.doc(
         params={
-            "category": {"in": "query"},
+            "activity": {"in": "query"},
             "city": {"in": "query"},
             "page": {"in": "query", "description": "Starts from 0"},
             "page_size": {"in": "query", "description": "Default is 20"},
