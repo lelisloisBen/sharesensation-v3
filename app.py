@@ -7,8 +7,8 @@ from api.route.auth import auth_ns
 def create_app():
     app = Flask(__name__)
     # setup with the configuration provided
-    app.config.from_object('config.ProductionConfig')
-    # app.config.from_object('config.DevelopmentConfig')
+    # app.config.from_object('config.ProductionConfig')
+    app.config.from_object('config.DevelopmentConfig')
 
     CORS(app)
     
@@ -23,6 +23,7 @@ def create_app():
         from api.route.activity import activity_ns
         from api.route.user import user_ns
         from api.route.user_acitivity import user_activity_ns
+        from api.route.payment import payment_ns
         from api.route.social_login import google_blueprint, facebook_blueprint
         import api.route.other as router_other
 

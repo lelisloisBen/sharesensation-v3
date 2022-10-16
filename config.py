@@ -45,6 +45,7 @@ class ProductionConfig(Config):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     FRONTEND_URL = 'https://sharesensation.herokuapp.com'
     BACKEND_URL = 'https://sharesensation-backend.herokuapp.com'
+    STRIPE_PRIVATE_KEY = os.environ.get('STRIPE_PRIVATE_KEY')
 
 class DevelopmentConfig(Config):
     ENV="development"
@@ -53,5 +54,6 @@ class DevelopmentConfig(Config):
     MAIL_SERVER = '127.0.0.1'
     MAIL_PORT = 1025
     FRONTEND_URL = 'http://localhost:3000'
-    BACKEND_URL = 'http://localhost:8000'
+    BACKEND_URL = 'http://localhost:5000'
+    STRIPE_PRIVATE_KEY = 'sk_test_51LoqOoLLg3TVYJvXgwBcfOqs0jdvtbOApWJJpq1CcAJYABcQNhrrYkdcZbXFvNssKON9uNF3ebyVVMZoaTWSUhpm00f4YkrsOl'
     
