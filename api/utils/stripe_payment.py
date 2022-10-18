@@ -19,3 +19,16 @@ def create_seller_account(user, seller):
     )
 
     return account_link.url
+
+def create_payment_intent(amount, seller_account_id):
+    return stripe.PaymentIntent.create(
+        amount=int(amount * 100),
+        currency='usd',
+        automatic_payment_methods={
+            'enabled': True,
+        },
+        application_fee_amount=int(amount * 0.13 * 100),
+        transfer_data={
+            'destination': seller_account_id,
+        }
+    )

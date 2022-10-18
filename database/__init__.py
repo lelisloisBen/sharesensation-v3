@@ -29,7 +29,7 @@ from .model.UserActivity import UserActivity
 from .model.UserActivityPrice import UserActivityPrice
 from .model.UserActivityTime import UserActivityTime
 from .model.StripeSellerAccount import StripeSellerAccount
-# from .model.UserActivityBook import UserActivityBook
+from .model.UserActivityBook import UserActivityBook
 
 def init_app(app):
     db.init_app(app)
